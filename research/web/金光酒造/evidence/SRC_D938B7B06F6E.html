@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <meta name="robots" content="index"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta name="description" content="株式会社金光酒造の会社概要です。"> 
+  <meta property="og:title" content="Company株式会社金光酒造"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:image" content="https://www.kamokin.com/bdflashinfo/thumbnail.png"> 
+  <meta property="og:url" content="https://www.kamokin.com/about_us/company.html"> 
+  <meta property="og:site_name" content="株式会社金光酒造"> 
+  <meta property="og:description" content="株式会社金光酒造の会社概要です。"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:image" content="https://www.kamokin.com/bdflashinfo/thumbnail.png"> 
+  <meta name="note:card" content="summary_large_image"> 
+  <link rel="canonical" href="https://www.kamokin.com/about_us/company.html"> 
+  <link rel="apple-touch-icon-precomposed" href="../_src/697/webclip0.png"> 
+  <title>Company株式会社金光酒造</title> 
+  <link rel="shortcut icon" href="../_src/76/favicon.ico"> 
+  <link rel="stylesheet" type="text/css" href="../_module/styles/bind.css?v=17.0.8" id="bind-css"> 
+  <link rel="stylesheet" type="text/css" href="../_dress/005ra/base.css?1783928999410"> 
+  <link rel="stylesheet" type="text/css" href="company.css?1783928999412c0100" id="page-css"> 
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400&amp;display=swap"> 
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Karla:wght@200;200italic;300;300italic;400;500;500italic;600;600italic;700;700italic;800;800italic;italic&amp;display=swap"> 
+  <link rel="stylesheet" type="text/css" href="../_webfonts.css?1783928999414" id="webfont-css"> 
+  <link rel="stylesheet" type="text/css" href="../_csslinkbtn/btn-import.css?1782356143520" id="linkbtn-css"> 
+  <!-- custom_tags_start --> 
+  <script>
+/* ============================================================
+   年齢確認ポップアップ（BiNDup「ページ設定 > スクリプトと詳細設定」貼り付け用）
+   このコード一式を、head内に挿入するタグの欄にそのまま貼り付けてください。
+   ブロックエディタの「カスタムタグ」には貼り付けないでください。
+   ============================================================ */
+(function () {
+  // ---- 設定項目 -------------------------------------------------
+  var STORAGE_KEY = "age_gate_verified_at"; // localStorageに保存するキー名
+  var VALID_HOURS = 1;                      // 何時間「確認済み」を保持するか
+  // ----------------------------------------------------------------
+
+  function isVerified() {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return false;
+    var elapsedHours = (Date.now() - parseInt(saved, 10)) / (1000 * 60 * 60);
+    return elapsedHours < VALID_HOURS;
+  }
+
+  function init() {
+    if (isVerified()) return; // 確認済みなら何もしない
+
+    // ---- スタイルを head に追加 ----
+    var style = document.createElement("style");
+    style.textContent = [
+      "#age-gate-overlay{position:fixed;inset:0;background:rgba(15,20,25,0.72);",
+      "display:flex;align-items:center;justify-content:center;z-index:2147483647;padding:16px;}",
+      ".age-gate-panel{background:#fff;border-radius:12px;max-width:420px;width:100%;",
+      "padding:36px 32px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25);",
+      "font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;}",
+      ".age-gate-icon{width:52px;height:52px;margin:0 auto 16px;border-radius:50%;",
+      "background:#f0f3f8;display:flex;align-items:center;justify-content:center;}",
+      ".age-gate-logo{max-width:200px;width:100%;height:auto;margin:0 auto 20px;display:block;}",
+      ".age-gate-panel h2{font-size:19px;margin:0 0 12px;color:#1b1f24;}",
+      ".age-gate-panel p{font-size:14px;color:#5c6570;line-height:1.7;margin:0 0 24px;}",
+      ".age-gate-link{margin-top:-12px !important;}",
+      ".age-gate-link a{font-size:12px;color:#2b4c7e;text-decoration:underline;}",
+      ".age-gate-link a:hover{color:#1d3a63;}",
+      ".age-gate-buttons{display:flex;gap:10px;}",
+      ".age-gate-buttons button{flex:1;padding:13px 12px;font-size:14px;font-weight:600;",
+      "border:none;border-radius:8px;cursor:pointer;}",
+      "#age-gate-yes{background:#2b4c7e;color:#fff;}",
+      "#age-gate-yes:hover{background:#1d3a63;}",
+      "#age-gate-no{background:#e9ecef;color:#3a3f45;}",
+      "#age-gate-no:hover{background:#dde1e5;}",
+      "#age-gate-retry{background:#2b4c7e;color:#fff;}",
+      "#age-gate-retry:hover{background:#1d3a63;}",
+      ".age-gate-footnote{margin-top:16px !important;font-size:11px !important;color:#9aa2ab !important;}"
+    ].join("");
+    document.head.appendChild(style);
+
+    // ---- オーバーレイ本体を body 直下に追加 ----
+    var overlay = document.createElement("div");
+    overlay.id = "age-gate-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.innerHTML =
+      '<div class="age-gate-panel">' +
+        '<img class="age-gate-logo" src="data:image/png;base64,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" alt="株式会社金光酒造">' +
+        '<div id="age-gate-question">' +
+          '<h2>ようこそ</h2>' +
+          '<p>あなたは20歳以上ですか？</p>' +
+          '<div class="age-gate-buttons">' +
+            '<button id="age-gate-yes" type="button">はい、20歳以上です</button>' +
+            '<button id="age-gate-no" type="button">いいえ</button>' +
+          '</div>' +
+          '<p class="age-gate-footnote">20歳未満の飲酒は法律で禁止されています。</p>' +
+        '</div>' +
+        '<div id="age-gate-blocked" hidden>' +
+          '<h2>申し訳ございません</h2>' +
+          '<p>本サイトはお酒に関する情報を含んでいるため、20歳以上のお客様を対象としています。</p>' +
+          '<p class="age-gate-link"><a href="https://arukenkyo.or.jp/health/minority/index.html" target="_blank" rel="noopener">20歳未満の者の飲酒防止<br>－公益社団法人アルコール健康医学協会－</a></p>' +
+          '<div class="age-gate-buttons">' +
+            '<button id="age-gate-retry" type="button">もう一度年齢確認をする</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+
+    var questionView = overlay.querySelector("#age-gate-question");
+    var blockedView = overlay.querySelector("#age-gate-blocked");
+
+    overlay.querySelector("#age-gate-yes").addEventListener("click", function () {
+      localStorage.setItem(STORAGE_KEY, Date.now().toString());
+      overlay.remove();
+      document.body.style.overflow = "";
+    });
+
+    overlay.querySelector("#age-gate-no").addEventListener("click", function () {
+      questionView.hidden = true;
+      blockedView.hidden = false;
+    });
+
+    overlay.querySelector("#age-gate-retry").addEventListener("click", function () {
+      blockedView.hidden = true;
+      questionView.hidden = false;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script> 
+  <!-- custom_tags_end --> 
+  <!-- Google tag (gtag.js) --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLR6DFHK9T"></script> 
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VLR6DFHK9T');
+</script> 
+ </head> 
+ <body id="l-1" class="l-1 bd-webp" data-type="responsive" data-ga-traking="true" data-page-animation="fade"> 
+  <div id="page" class="bg-window  animsition"> 
+   <div class="bg-document"> 
+    <noscript> 
+     <div id="js-off"> 
+      <img src="../_module/images/noscript.gif" alt="Enable JavaScript in your browser. このウェブサイトはJavaScriptをオンにしてご覧下さい。"> 
+     </div> 
+    </noscript> 
+    <div id="a-header" data-float="false" class="a-header   cssskin-_area_header"> 
+     <header> 
+      <div class="site_frame"> 
+       <section> 
+        <div id="bk621" class="b-plain c-space_normal c-sp-space_normal c-padding_normal c-sp-padding_normal cssskin-h1" data-bk-id="bk621"> 
+         <div class=" column -column1"> 
+          <h1 class=" c-page_title"><span style="color:#000000;" data-sitecolor-text="">株式会社金光酒造Company</span></h1> 
+         </div> 
+        </div> 
+        <div id="bk16" class="b-both_diff -right_large -sp-single_column c-space_normal c-sp-space_normal c-sp-padding_normal bd-webp -dress_005ra cssskin-_block_header" data-bk-id="bk16" data-shared="true" data-sharedname="_ヘッダ"> 
+         <div class=" g-column"> 
+          <div class=" column -col4 -col_sub"> 
+           <div class=" c-body c-left">
+             &nbsp; 
+           </div> 
+           <div class=" c-body c-center"> 
+            <div class="c-img   "> 
+             <a href="../index.html" data-pid="1"> 
+              <picture> 
+               <source type="image/webp" srcset="../_src/962/img20251006132427668779.webp?v=1782356143520"> 
+               <img src="../_src/962/img20251006132427668779.png?v=1782356143520" width="480" height="100" alt="" id="imgsrc962_1" loading="lazy"> 
+              </picture></a> 
+            </div> 
+           </div> 
+          </div> 
+          <div class=" column -col8 -col_main"> 
+           <p class=" c-body">&nbsp;</p> 
+           <div class=" c-body c-center"> 
+            <span style="font-size:30px;" data-font-size-num="30px"><a href="https://www.facebook.com/kamokinshu/" target="_blank" rel="noopener noreferrer"><span class="bindicon-facebook2"></span></a>　<a href="https://www.instagram.com/kanemitsu.kamokin/" target="_blank" rel="noopener noreferrer"><span class="bindicon-instagram"></span></a>　<a href="https://youtu.be/7DfBndk6T2w" target="_blank" rel="noopener noreferrer"><span class="bindicon-youtube3"></span></a>　<a href="mailto:info@kamokin.com" target="_blank" rel="noopener noreferrer"><span class="bindicon-mail5"></span></a></span> 
+           </div> 
+           <nav> 
+            <div id="js-globalNavigation" data-slide-type="upSlide" data-btn-position="rightTop_fixed"> 
+             <div class=" js-motion"> 
+              <ul class="m-motion menu-parts -f"> 
+               <li><span class=" webfont3"><a href="../message.html" data-pid="2">Message</a></span></li> 
+               <li><span class=" webfont3"><a href="../about_us/about_us.html" data-pid="8">About Us</a></span> 
+                <ul> 
+                 <li class=" c-current"><span class=" webfont3"><a href="company.html" data-mypid="9">Company</a></span></li> 
+                 <li><span class=" webfont3"><a href="../about_us/access.html" data-pid="11">Access</a></span></li> 
+                </ul></li> 
+               <li><span class=" webfont3"><a href="../brewery/brewery.html" data-pid="12">Sake Making</a></span> 
+                <ul> 
+                 <li><span class=" webfont3"><a href="../brewery/process/process.html" data-pid="15">Sake Making Process</a></span></li> 
+                 <li><span class=" webfont3"><a href="../brewery/rice.html" data-pid="13">Sake Rice</a></span></li> 
+                 <li><span class=" webfont3"><a href="../brewery/award.html" data-pid="14">Recent Awards</a></span></li> 
+                </ul></li> 
+               <li><span class=" webfont3"><a href="../line_up/line_up.html" data-pid="27">Line Up</a></span> 
+                <ul> 
+                 <li><span class=" webfont3"><a href="../line_up/regular.html" data-pid="28">Regular</a></span></li> 
+                 <li><span class=" webfont3"><a href="../line_up/Limited/limited.html" data-pid="30">Limited</a></span></li> 
+                 <li><span class=" webfont3"><a href="../line_up/liqueur.html" data-pid="29">Liqueur</a></span></li> 
+                </ul></li> 
+               <li><span class=" webfont3"><a href="../shop_list.html" data-pid="4">Shop List</a></span> 
+                <ul> 
+                 <li><a href="../shop_list.html#hokkaido" data-pid="4">北海道・東北地方</a></li> 
+                 <li><a href="../shop_list.html#tokyo" data-pid="4">関東地方</a></li> 
+                 <li><a href="../shop_list.html#yamanashi" data-pid="4">中部地方</a></li> 
+                 <li><a href="../shop_list.html#shiga" data-pid="4">近畿地方</a></li> 
+                 <li><a href="../shop_list.html#hiroshima" data-pid="4">中国地方</a></li> 
+                 <li><a href="../shop_list.html#fukuoka" data-pid="4">九州地方</a></li> 
+                </ul></li> 
+               <li><span class=" webfont3"><a href="../gallery/gallery.html" data-pid="32">Gallery</a></span></li> 
+               <li><span class=" webfont3"><a href="../symbol.html" data-pid="3">Symbol Mark</a></span></li> 
+               <li><span class=" webfont3"><a href="../link.html" data-pid="5">Link</a></span></li> 
+              </ul> 
+             </div> 
+            </div> 
+            <div id="spNavigationTrigger" class=" c-sp_navigation_btn"></div> 
+           </nav> 
+          </div> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </header> 
+    </div> 
+    <div id="a-billboard" class="a-billboard    cssskin-_area_billboard"> 
+     <div class="site_frame"> 
+      <section> 
+       <div id="bk17" class="b-plain c-space_normal c-sp-space_normal c-sp-padding_init cssskin-_block_billboard init-block_animation init-sp-block_animation" data-bk-id="bk17" data-animated="fadeInLeft" data-sp-animated="fadeInLeft"> 
+        <div class=" column -column1"> 
+         <h2 class=" c-title"> 
+          <div class="c-img   "> 
+           <picture> 
+            <source type="image/webp" srcset="../_src/10/sign.webp?v=1782356143520"> 
+            <img src="../_src/10/sign.png?v=1782356143520" width="280" height="100" alt="" id="imgsrc10_1" loading="lazy"> 
+           </picture> 
+          </div></h2> 
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+    </div> 
+    <main> 
+     <div id="a-site_contents" class="a-site_contents  noskin"> 
+      <article> 
+       <div class="site_frame"> 
+        <div class="g-column"> 
+         <div id="a-main" class="a-main column -col12 "> 
+          <section> 
+           <div id="bk128" class="b-plain c-space_normal c-sp-space_normal c-padding_normal c-sp-padding_normal cssskin-_block_main" data-bk-id="bk128" data-shared="true" data-sharedname="_パンくず"> 
+            <div class=" column -column1"> 
+             <p class=" c-body"><span class=" webfont1"></span></p> 
+             <div class="c-breadcrumb"> 
+              <a href="../index.html" data-pid="1">Home</a> | 
+              <a href="about_us.html" data-pid="8">AboutUs</a> | 
+              <em>Company</em> 
+             </div> 
+             <p></p> 
+            </div> 
+           </div> 
+           <div id="bk68" class="b-album c-space_normal c-sp-space_normal c-padding_normal c-sp-padding_normal cssskin-_block_main init-block_animation init-sp-block_animation" data-bk-id="bk68" data-animated="bothSideIn" data-sp-animated="bothSideIn"> 
+            <div class=" g-column -col2 -sp-col1 -no_spacing"> 
+             <div class=" column -column1"> 
+              <h3 class=" c-large_headline c-left">会社概要</h3> 
+              <div class=" c-body c-left">
+                &nbsp; 
+              </div> 
+              <div class=" c-left c-photo"> 
+               <div class="c-img c-fleft  "> 
+                <picture> 
+                 <source type="image/webp" srcset="../_src/11/_dsc8901.webp?v=1782356143520"> 
+                 <img src="../_src/11/_dsc8901.jpg?v=1782356143520" width="2000" height="1332" alt="" id="imgsrc11_1" loading="lazy"> 
+                </picture> 
+               </div> 
+              </div> 
+             </div> 
+             <div class=" column -column2 -column-lasts"> 
+              <div class=" c-body c-left">
+                &nbsp; 
+              </div> 
+              <div class=" c-body c-left">
+                &nbsp; 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;" data-sitecolor-text="">社名　　株式会社金光酒造</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;">創業　　1880年(明治13年)</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;">資本金　1140万円</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <br> 
+               <span style="color:#434343;">代表取締役　金光秀起</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;">　</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;">所在地</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;">広島県東広島市</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;">黒瀬町乃美尾1364-2</span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;">Tel 0823-82-2006</span> 
+               <br> 
+               <span style="color:#434343;">Fax 0823-82-7948</span> 
+               <br> 
+               <span style="color:#434343;">e-Mail <a href="mailto:info@kamokin.com" target="_blank" rel="noopener noreferrer">info@kamokin.com</a></span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <span style="color:#434343;" class=" d-small_font"><a style="color: #434343;" href="mailto:sakurasaku@mx4.tiki.ne.jp"></a><a href="../about_us/access.html" data-pid="11">Access&gt;&gt;</a></span> 
+              </div> 
+              <div class=" c-body c-left"> 
+               <hr class="c-hr"> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+           <div id="bk91" class="b-plain c-space_normal c-sp-space_normal c-padding_normal c-sp-padding_normal cssskin-_block_main init-block_animation init-sp-block_animation" data-bk-id="bk91" data-animated="fadeIn" data-sp-animated="fadeIn"> 
+            <div class=" column -column1"> 
+             <h3 class=" c-large_headline">会社略歴</h3> 
+             <p class=" c-body">&nbsp;</p> 
+             <ul class="c-list-no_mark"> 
+              <li><span style="color:#434343;" data-sitecolor-text="" data-font-size="16px">1880年（明治13年）</span></li> 
+              <ul class="c-list-no_mark"> 
+               <li><span style="color:#434343;" data-font-size="16px">創業当時「賀茂の露」「鬼酔」「桜吹雪」などの銘柄を使用していたが、上位酒のブランドであった「桜吹雪」をメインブランドとして売り出す。</span></li> 
+              </ul> 
+             </ul> 
+             <p class=" c-body">&nbsp;</p> 
+             <ul class="c-list-no_mark"> 
+              <li><span style="color:#434343;" data-font-size="16px">1994年（平成6年）</span></li> 
+              <ul class="c-list-no_mark"> 
+               <li><span style="color:#434343;" data-font-size="16px">時代の流れにより季節雇用という蔵人制度の維持が困難になり、蔵人を大幅に減らしながらも酒造を維持できる自動プラントの導入に踏み切る。</span></li> 
+              </ul> 
+             </ul> 
+             <p class=" c-body">&nbsp;</p> 
+             <ul class="c-list-no_mark"> 
+              <li><span style="color:#434343;" data-font-size="16px">2003年（平成15年）</span></li> 
+              <ul class="c-list-no_mark"> 
+               <li><span style="color:#434343;" data-font-size="16px">しかしながら、そのプラントでは均一的な酒質はできても「個性」のあるお酒はできず、季節雇用を廃止して社員蔵人にて手造りを行い、新ブランド「賀茂金秀」として私たちの考えを理解していただける酒販店との直取引を行い、全国への出荷をはじめる。</span></li> 
+               <li>&nbsp;</li> 
+              </ul> 
+              <li><span style="color:#434343;" data-font-size="16px">2025年（令和7年）</span></li> 
+              <ul class="c-list-no_mark"> 
+               <li><span style="color:#434343;" data-font-size="16px">金光酒造合資会社から株式会社金光酒造へ変更する。</span></li> 
+              </ul> 
+             </ul> 
+             <hr class="c-hr"> 
+            </div> 
+           </div> 
+           <div id="bk106" class="b-plain c-space_normal c-sp-space_normal c-padding_normal c-sp-padding_normal cssskin-_block_main init-block_animation init-sp-block_animation" data-bk-id="bk106" data-animated="fadeIn" data-sp-animated="fadeIn"> 
+            <div class=" column -column1"> 
+             <h2 class=" c-title">使命</h2> 
+             <p class=" c-body">&nbsp;<br><span style="color:#434343;">真に心を込めた酒造りを行うことにより、飲んでいただくお客様に感動と安らぎを与え、人との出会いを広げることを使命とする。</span></p> 
+             <hr class="c-hr"> 
+            </div> 
+           </div> 
+           <div id="bk152" class="b-plain c-space_normal c-sp-space_normal c-padding_normal c-sp-padding_normal cssskin-_block_main init-block_animation init-sp-block_animation" data-bk-id="bk152" data-animated="fadeIn" data-sp-animated="fadeIn"> 
+            <div class=" column -column1"> 
+             <div class=" c-body">
+               &nbsp; 
+              <div class="c-img c-fleft  "> 
+               <picture> 
+                <source type="image/webp" srcset="../_src/78/p10201120.webp?v=1782356143520"> 
+                <img src="../_src/78/p10201120.jpg?v=1782356143520" width="235" height="83" alt="" id="imgsrc78_1" loading="lazy"> 
+               </picture> 
+              </div> 
+              <br> 
+              <span style="color:#434343;" data-sitecolor-text="">　代々受け継がれてきた清酒製造業を謹んで守り、社員とその家族が幸せになる会社を目指す。</span> 
+             </div> 
+             <hr class="c-hr"> 
+            </div> 
+           </div> 
+          </section> 
+         </div> 
+        </div> 
+       </div> 
+      </article> 
+     </div> 
+    </main> 
+    <div id="a-footer" data-float="false" class="a-footer   cssskin-_area_footer"> 
+     <footer> 
+      <div class="site_frame"> 
+       <div id="bk260" class="b-plain c-space_normal c-sp-space_normal c-padding_normal cssskin-_block_footer" data-bk-id="bk260" data-shared="true" data-sharedname="_フッタースペース"> 
+        <div class=" column -column1"> 
+         <div class=" c-body c-right"> 
+          <div class="c-img   "> 
+           <a href="../index.html" data-pid="1"> 
+            <picture> 
+             <source type="image/webp" srcset="../_src/631/footer.webp?v=1782356143520"> 
+             <img src="../_src/631/footer.png?v=1782356143520" width="1500" height="360" alt="" id="imgsrc631_1" class=" c-no_adjust" loading="lazy"> 
+            </picture></a> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+       <div id="bk69" class="b-plain c-space_normal c-sp-space_normal c-sp-padding_normal cssskin-_block_footer_footnavi" data-bk-id="bk69" data-shared="true" data-sharedname="_フッタナビゲーション"> 
+        <div class=" g-column -col4 -sp-col1"> 
+         <div class=" column -column1"> 
+          <p class=" c-body"><span class=" webfont3"><a href="../message.html" data-pid="2">Message</a></span><br><span class=" webfont3">&nbsp;</span><br><span class=" webfont3"><a href="../about_us/about_us.html" data-pid="8">About Us</a></span><br><span class=" webfont3">　<a href="company.html" data-mypid="9">Company</a></span><br><span class=" webfont3">　<a href="../about_us/access.html" data-pid="11">Access</a></span></p> 
+         </div> 
+         <div class=" column -column2"> 
+          <p class=" c-body"><span class=" webfont3"><a href="../brewery/brewery.html" data-pid="12">Sake Making</a></span><br><span class=" webfont3">　<a href="../brewery/process/process.html" data-pid="15">Sake Making Process</a></span><br><span class=" webfont3">　<a href="../brewery/rice.html" data-pid="13">Sake Rice</a></span><br><span class=" webfont3">　<a href="../brewery/award.html" data-pid="14">Recent Awards</a></span></p> 
+         </div> 
+         <div class=" column -column3"> 
+          <p class=" c-body"><span class=" webfont3"><a href="../line_up/line_up.html" data-pid="27">Line Up</a></span><br><span class=" webfont3">　<a href="../line_up/regular.html" data-pid="28">Regular</a></span><br><span class=" webfont3">　<a href="../line_up/Limited/limited.html" data-pid="30">Limited</a></span><br><span class=" webfont3">　<a href="../line_up/liqueur.html" data-pid="29">Liqueur</a></span><br><span class=" webfont3">&nbsp;</span><br><span class=" webfont3"><a href="../shop_list.html" data-pid="4">Shop List</a></span></p> 
+         </div> 
+         <div class=" column -column4 -column-lasts"> 
+          <p class=" c-body"><span class=" webfont3"><a href="../gallery/gallery.html" data-pid="32">Gallery</a></span><br><span class=" webfont3">&nbsp;</span><br><span class=" webfont3"><a href="../symbol.html" data-pid="3">Symbol Mark</a></span><br><span class=" webfont3">&nbsp;</span><br><span class=" webfont3"><a href="../link.html" data-pid="5">Link</a></span></p> 
+         </div> 
+        </div> 
+       </div> 
+       <div id="bk243" class="b-plain c-space_normal c-sp-space_normal c-sp-padding_normal cssskin-_block_footer" data-bk-id="bk243" data-shared="true" data-sharedname="_フッター_ソーシャル"> 
+        <div class=" column -column1"> 
+         <p class=" c-body"><span style="font-size:30px;"><a href="https://www.facebook.com/kamokinshu/" target="_blank" rel="noopener noreferrer"><span class="bindicon-facebook2"></span></a>&nbsp;<a href="https://www.instagram.com/kanemitsu.kamokin/" target="_blank" rel="noopener noreferrer"><span class="bindicon-instagram"></span></a>&nbsp;<a href="https://youtu.be/7DfBndk6T2w" target="_blank" rel="noopener noreferrer"><span class="bindicon-youtube3"></span></a>&nbsp;<a href="mailto:info@kamokin.com" target="_blank" rel="noopener noreferrer"><span class="bindicon-mail5"></span></a></span></p> 
+        </div> 
+       </div> 
+       <div id="bk92" class="b-plain c-space_normal c-sp-space_normal c-sp-padding_normal cssskin-_block_copyright" data-bk-id="bk92" data-shared="true" data-sharedname="_コピーライト"> 
+        <div class=" column -column1"> 
+         <div class=" c-body c-center">
+           20歳未満の飲酒は、法律で禁止されています。 
+         </div> 
+         <div class=" c-body c-center">
+           © 2020 Kanemitsu Shuzo Co.,Ltd. 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </footer> 
+    </div> 
+    <div id="w-top-left" class="w-base w-top w-left"> 
+     <div id="bk153" class="b-plain" data-bk-id="bk153"> 
+      <div class=" column -column1"> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="w-top-right" class="w-base w-top w-right"> 
+     <div id="bk154" class="b-plain" data-bk-id="bk154"> 
+      <div class=" column -column1"> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="w-middle-left" class="w-base w-middle w-left"> 
+     <div id="bk155" class="b-plain" data-bk-id="bk155"> 
+      <div class=" column -column1"> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="w-middle-right" class="w-base w-middle w-right"> 
+     <div id="bk156" class="b-plain" data-bk-id="bk156"> 
+      <div class=" column -column1"> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="w-bottom-left" class="w-base w-bottom w-left"> 
+     <div id="bk157" class="b-plain" data-bk-id="bk157"> 
+      <div class=" column -column1"> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="w-bottom-right" class="w-base w-bottom w-right" data-follow-footer="true" data-disp-on-scroll="true"> 
+     <div id="bk172" class="b-plain c-space_normal c-sp-space_normal c-padding_normal c-sp-padding_normal" data-bk-id="bk172" data-shared="true" data-sharedname="_page_top"> 
+      <div class=" column -column1"> 
+       <div class="c-none c-center"> 
+        <a href="#" class="c-link_top js-link_scroller"><span class="bindicon-arrow-up"></span></a> 
+        <style>
+.c-link_top {
+display:inline-block;
+width:3em;
+height:3em;
+border:1px solid;
+border-radius:50%;
+text-align:center;
+line-height:3;
+}
+</style> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script src="../_module/lib/lib.js?v=17.0.8" defer></script> 
+  <script src="../_module/scripts/bind.js?v=17.0.8" id="script-js" defer></script> 
+  <!--[if lt IE 9]><script src="../_module/lib/html5shiv.min.js?v=17.0.8"></script><![endif]-->  
+ </body>
+</html>

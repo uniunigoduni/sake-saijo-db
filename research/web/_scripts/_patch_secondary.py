@@ -1,0 +1,10 @@
+from pathlib import Path
+p=Path(r'C:\Users\tarou\Downloads\sake-saijo-db\research\web\_scripts\collect_catalog.py')
+t=p.read_text(encoding='utf-8')
+needle="""def collect_sanyotsuru():\n"""
+insert="""def collect_secondary_databases():\n    pages = {\n        '賀茂泉酒造':'https://sakeai.com/brand/3501',\n        '西條鶴醸造':'https://sakeai.com/brand/3502',\n        '亀齢酒造':'https://sakeai.com/brand/2775',\n        '賀茂鶴酒造':'https://sakeai.com/brand/2788',\n        '山陽鶴酒造':'https://sakeai.com/brand/2793',\n    }\n    prefixes = {'賀茂泉酒造':'賀茂泉 ','西條鶴醸造':'西條鶴 ','亀齢酒造':'亀齢 ','賀茂鶴酒造':'賀茂鶴 ','山陽鶴酒造':'山陽鶴 '}\n    for brewery,u in pages.items():\n        try:\n            sid,_=save_source(brewery,u,'secondary_database')\n            doc=html.fromstring((ROOT/brewery/'evidence'/f'{sid}.html').read_bytes().decode('utf-8','replace'))\n            found=[]\n            for a in doc.xpath('//a[@href]'):\n                href=a.get('href') or ''\n                if not re.fullmatch(r'/sake/\\d+', href): continue\n                name=' '.join(a.text_content().split())\n                if not name or name in found: continue\n                found.append(name)\n            added=0\n            for raw in found:\n                if any(x in raw for x in ['梅酒','ゆず酒']): continue\n                name=raw\n                pref=prefixes[brewery]\n                if name.startswith(pref): name=name[len(pref):]\n                add_record(brewery,name,'不明',sid,'','二次DBで銘柄の存在を確認。現在の販売状態は未確認',u)\n                added+=1\n            print('secondary',brewery,added,flush=True)\n        except Exception as e: print('secondary error',brewery,u,e,flush=True)\n\n"""+needle
+if needle not in t: raise SystemExit('insertion point missing')
+t=t.replace(needle,insert)
+t=t.replace('collect_fukubijin,collect_kirei,collect_extra_history,collect_sanyotsuru,collect_manual_official]', 'collect_fukubijin,collect_kirei,collect_extra_history,collect_secondary_databases,collect_sanyotsuru,collect_manual_official]')
+p.write_text(t,encoding='utf-8')
+print('secondary collector patched')

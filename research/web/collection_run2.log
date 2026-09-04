@@ -1,0 +1,18 @@
+START collect_hakubotan
+hakubotan 20 / 83
+hakubotan 40 / 83
+hakubotan 60 / 83
+hakubotan 80 / 83
+START collect_saijotsuru
+saijotsuru products 25
+START collect_kamotsuru
+kamotsuru products 35
+START collect_kamoizumi
+kamoizumi parsed
+START collect_fukubijin
+fukubijin products 21
+START collect_kirei
+kirei retailer products 19
+START collect_sanyotsuru
+START collect_manual_official
+{"generated_at": "2026-09-04T22:35:06.058168+00:00", "records": 150, "by_brewery": {"‰ê–Î’ßğ‘¢": 29, "”’‰²’Oğ‘¢": 46, "¼Š’ßø‘¢": 20, "‹T—îğ‘¢": 17, "•Ÿ”ülğ‘¢": 15, "‰ê–Îòğ‘¢": 15, "R—z’ßğ‘¢": 8}, "by_status": {"”Ì”„’†": 136, "‹x”„": 0, "I”„": 4, "•s–¾": 10}, "sources": 215, "prompt_injection_hits": 0}

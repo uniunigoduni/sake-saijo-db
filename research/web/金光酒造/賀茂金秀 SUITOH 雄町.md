@@ -1,0 +1,45 @@
+# 賀茂金秀 SUITOH 雄町
+
+## 基本情報
+
+- ID: KANEMITSU_F8DFD9F785
+- 酒蔵: 金光酒造
+- ブランド: 賀茂金秀 / 桜吹雪
+- 商品名: 賀茂金秀 SUITOH 雄町
+- 販売状態: 不明
+- 販売状態確認日: 2026-09-05
+- 特定名称: 
+- 精米歩合: 
+- アルコール度数: 
+- 日本酒度: 
+- 酸度: 
+- アミノ酸度: 
+- 使用米: 
+- 酵母: 
+- 製法: 
+- おすすめ温度: 
+- おすすめ酒器: 
+- 料理ペアリング: 
+- おすすめシーン: 
+
+## 情報源
+
+### SRC_652DCA8542FA
+- 種類: official_limited_lineup
+- URL: https://www.kamokin.com/line_up/Limited/limited.html
+- 取得日時: 2026-09-04T22:57:39.654963+00:00
+- HTTP: cached
+- 保存ファイル: 金光酒造/evidence/SRC_652DCA8542FA.html
+- SHA-256: d07f75f882344fb0318618ac6c4a8c90298aab1549e08d299fadf2d1f93167c6
+
+### SRC_8D7D42372EE0
+- 種類: secondary_database
+- URL: https://sakeai.com/brand/2782
+- 取得日時: 2026-09-04T22:58:00.709910+00:00
+- HTTP: cached
+- 保存ファイル: 金光酒造/evidence/SRC_8D7D42372EE0.html
+- SHA-256: c2049c76d3b4d7a54dc32181b68bc7f87509f11105d523d7243e68cb8ecc846c
+
+## メモ
+
+公式限定ラインナップ掲載。現在の在庫・販売時期は断定せず / 二次DBでも存在確認
