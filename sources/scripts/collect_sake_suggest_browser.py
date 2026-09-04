@@ -8,7 +8,7 @@ from urllib.parse import parse_qs, urlparse
 
 from playwright.sync_api import sync_playwright
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parent.parent / "sake_suggest"
 EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 MANIFEST = HERE / "sake_suggest_browser_manifest.jsonl"
 INJECTION = HERE / "potential_prompt_injection.jsonl"

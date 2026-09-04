@@ -1,0 +1,655 @@
+[
+  {
+    "_id": "57fe4a2b68595fc7ba677c80",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/237",
+    "subname": "",
+    "aminoAcidContent": "1.1",
+    "alcoholContent": "17.5",
+    "price": "¥3000",
+    "award": "",
+    "sakeYeast": "栃木酵母",
+    "brand": "開華原酒　みがき竹皮",
+    "volume": "1800ml",
+    "sakeRiceExceptForKojiMaking": "あさひの夢・ひとごごち",
+    "sakeMeterValue": "+3",
+    "mariage": "鰺の塩焼き（スダチ添え）、牛タン塩焼き（レモン添え）など、柑橘類を添えた塩焼き料理と好相性 ",
+    "type": "特別純米",
+    "ricePolishingRate": "59",
+    "brewery": "第一酒造",
+    "breweryYear": "",
+    "matchDrinkingVessel": "小振りの猪口、小型のぐい呑みなど ",
+    "matchDrinkingSceneAndTarget": "通年向け。男性向け。和のシーン向け。友人との語らい向け。食中酒向け。 ",
+    "matchDrinkingTemperature": "18℃前後または45℃前後",
+    "prefecture": "栃木県",
+    "starterCulture": "速醸",
+    "acidity": "1.8",
+    "description": "原酒ならではのコクとキレを持った純米酒。後味の力強い辛口感が特徴 ",
+    "riceForMakingKoji": "あさひの夢・ひとごごち"
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677c79",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/229",
+    "subname": "",
+    "aminoAcidContent": "1",
+    "alcoholContent": "14.5",
+    "price": "¥2000",
+    "award": "",
+    "sakeYeast": "栃木酵母",
+    "brand": "開華酒",
+    "volume": "1800ml",
+    "sakeRiceExceptForKojiMaking": "あさひの夢",
+    "sakeMeterValue": "+2",
+    "mariage": "鰤の塩焼き、海老の天ぷら、生ウニ、マグロ中落ち、鶏モモ肉のソテー、広東風五目野菜のうま煮などと好相性 ",
+    "type": "純米",
+    "ricePolishingRate": "65",
+    "brewery": "第一酒造",
+    "breweryYear": "",
+    "matchDrinkingVessel": "平杯、磁器製のぐい呑み、中型タンブラー、小型ワイングラスなど ",
+    "matchDrinkingSceneAndTarget": "季節問わない。万人向け。カジュアルなシーン向け。仲間との宴会向け。食中酒向け。冷やからぬる燗まで対応 ",
+    "matchDrinkingTemperature": "10～18℃または40度前後",
+    "prefecture": "栃木県",
+    "starterCulture": "速醸",
+    "acidity": "1.5",
+    "description": "原料の米由来の香りは軽快。穏やかな旨味が特徴の純米酒。やや辛口。 ",
+    "riceForMakingKoji": "あさひの夢"
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677cfd",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/366",
+    "subname": "山廃原酒・低温熟成（４～６℃）",
+    "aminoAcidContent": "",
+    "alcoholContent": "",
+    "price": "",
+    "award": "",
+    "sakeYeast": "",
+    "brand": "山廃塾露枯",
+    "volume": "",
+    "sakeMeterValue": "",
+    "mariage": "鰻のかば焼き、フカヒレの姿煮、すき焼き、ローストチキンなどコクのある料理と好相性。 ",
+    "type": "純米",
+    "brewery": "島崎酒造",
+    "breweryYear": "",
+    "matchDrinkingVessel": "備前焼、瀬戸焼、唐津焼きなど ",
+    "matchDrinkingSceneAndTarget": "日本酒好き向け。秋から冬向け。常温向け。 ",
+    "matchDrinkingTemperature": "２０℃前後",
+    "prefecture": "栃木県",
+    "starterCulture": "",
+    "acidity": "",
+    "description": "穏やかでふくらみのある熟成香。厚みのある酸味と旨味が特徴。やや甘口 "
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677de4",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/602",
+    "subname": "",
+    "aminoAcidContent": "",
+    "alcoholContent": "",
+    "price": "",
+    "award": "",
+    "sakeYeast": "",
+    "brand": "松の寿",
+    "volume": "",
+    "sakeMeterValue": "",
+    "mariage": "魚介刺身、タコのポン酢、サヨリの細作り、魚介のマリネなど ",
+    "type": "純米",
+    "brewery": "松井酒造店",
+    "breweryYear": "",
+    "matchDrinkingVessel": "シェリーグラス、磁器の猪口など ",
+    "matchDrinkingSceneAndTarget": "季節を問わず楽しめる。特に魚介類と好相性を示す ",
+    "matchDrinkingTemperature": "20℃又は40℃前後",
+    "prefecture": "栃木県",
+    "starterCulture": "",
+    "acidity": "",
+    "description": "原料香とミネラル香。まろやかな甘味と酸味。ほどよい旨味 "
+  },
+  {
+    "_id": "581d50b9b2aef4001169748b",
+    "brand": "仙禽",
+    "subname": "秋あがり　赤とんぼ",
+    "type": "純米",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-08T10:55:08.897Z"
+  },
+  {
+    "_id": "5811a66b1e09280011814c8a",
+    "brand": "鳳凰美田",
+    "subname": "山田錦五割磨き",
+    "type": "純米大吟醸",
+    "prefecture": "栃木県",
+    "brewery": "小林酒造",
+    "url": "http://sasara.pto.co.jp/kuramoto_list/kobayashi.html",
+    "description": "一面の田園風景の中、豊富な地下水の小山市美田地区に建つ小林酒造は、「地元に根差した愛される酒、愛される酒蔵を目指す」という考えのもと、とことん吟醸酒造りにこだわりを持ち、全国に知れ渡る名醸蔵。
+　醸される酒は、マスカットやメロンのような香りを持ち、体に馴染むような優しい酒質を基調とする。（URLから引用）",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "山田錦",
+    "riceForMakingKoji": "山田錦",
+    "ricePolishingRate": "50",
+    "alcoholContent": "16",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-09T10:09:29.613Z"
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677def",
+    "brand": "大那",
+    "subname": "那須五百万石",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "菊の里酒造",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/613",
+    "description": "柔らかでまるみのある飲み口。軽やかな穀物香が中心だが、爽やかなミネラル香も感じられる。みずみずしい酸味と軽やかな旨味を中盤からの苦味が引き締める味わい ",
+    "starterCulture": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "五百万石",
+    "riceForMakingKoji": "五百万石",
+    "ricePolishingRate": "55",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-09T12:18:11.655Z"
+  },
+  {
+    "_id": "582314b670f94d0012a9dec2",
+    "brand": "大那",
+    "subname": "特別純米　ひやおろし",
+    "type": "特別純米",
+    "prefecture": "栃木県",
+    "brewery": "菊の里酒造",
+    "url": "",
+    "description": "地酒は、食生活をより楽しく彩る名脇役と考えています。土地の水や空気に触れるような気持ちで飲んでもらえたらうれしいです。
+（ラベルより）",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "57",
+    "alcoholContent": "16.5",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-09T12:21:07.762Z"
+  },
+  {
+    "_id": "582318f270f94d0012a9dec4",
+    "brand": "仙禽",
+    "subname": "線香花火",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "",
+    "description": "無ろ過・原酒・瓶囲い瓶火入れ。
+
+ゆく夏を惜しみ、秋の気配をそこはかとなく感じる夏の終わりの頃。
+夏から秋にかけて季節の節目にふさわしい酸が、ゆく夏に後ろ髪をひかれる味わいにまっています。
+（ラベルより）",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "ドメーヌさくら雄町",
+    "riceForMakingKoji": "ドメーヌさくら雄町",
+    "ricePolishingRate": "50",
+    "alcoholContent": "14",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-09T12:39:11.428Z"
+  },
+  {
+    "_id": "5826d78fadf3680012574f5f",
+    "brand": "雄東正宗",
+    "subname": "",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "杉田酒造",
+    "url": "",
+    "description": "
+遺酒
+1.8L詰
+日本酒専門店萬亮TR
+雄東正宗純米吟釀「雄町」
+The First & The Last
+55%
+了ルール度数
+17度
+迫隼月
+2016.3(瓶蕫旦ーーー
+No.1 08
+搾りはじめで採
+梁此めで锞つた「あらぱしり」と最後に
+圧力を掛け
+译った「セメ」をブレンドしたお酒です。フレーag
+qu!店 サンプル数種類の中から決定
+包衬がサ
+萬亮°1-二本限定酒です.
+rum Ill1封には妊 娠中、授乳期での飲酒
+test -taにな
+でい,保存は冷
+に误をでい。開封には注意して下さい
+T?URI封後は御早目に
+くださし
+㈱Tbr禾県ホ山i
+",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "雄町",
+    "riceForMakingKoji": "雄町",
+    "ricePolishingRate": "55",
+    "alcoholContent": "17",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-12T08:49:18.219Z"
+  },
+  {
+    "_id": "5826d78dadf3680012574f5e",
+    "brand": "雄東正宗",
+    "subname": "",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "杉田酒造",
+    "url": "",
+    "description": "日本酒専門店萬亮限定
+「あらぱしり」と最後に圧力を掛けてとった「セメ」をブレンドしたお酒です。
+",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "雄町",
+    "riceForMakingKoji": "雄町",
+    "ricePolishingRate": "55",
+    "alcoholContent": "17",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-12T08:51:23.366Z"
+  },
+  {
+    "_id": "582fd5fffbda03001200b5b1",
+    "brand": "東力士",
+    "subname": "洞窟熟成　ニゴリ　四夏超え",
+    "type": "本醸造",
+    "prefecture": "栃木県",
+    "brewery": "島崎酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "15.5",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-19T04:32:55.987Z"
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677dd5",
+    "brand": "鳳凰美田",
+    "subname": "剱",
+    "type": "純米",
+    "prefecture": "栃木県",
+    "brewery": "小林酒造",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/587",
+    "description": "原料が中心ながら、柑橘系の香りが加わる香り。なめらかでふわりとしたテクスチャー。清々しく、キレイな後味 ",
+    "starterCulture": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-26T12:59:58.928Z"
+  },
+  {
+    "_id": "58398789a5f20400129bd0f0",
+    "brand": "鳳凰美田",
+    "subname": "winecell",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "小林酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-11-27T02:57:41.746Z"
+  },
+  {
+    "_id": "583049aafbda03001200b5b3",
+    "brand": "若駒",
+    "subname": "",
+    "type": "普通",
+    "prefecture": "栃木県",
+    "brewery": "若駒酒造",
+    "url": "",
+    "description": "若駒雄町70
+火入れ 無瀘過原酒
+",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "雄町",
+    "riceForMakingKoji": "雄町",
+    "ricePolishingRate": "",
+    "alcoholContent": "16.5",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-12-22T07:42:58.901Z"
+  },
+  {
+    "_id": "5864fe97cbb6c30011a09f78",
+    "brand": "若駒",
+    "subname": "五百石80　無加圧搾り",
+    "type": "純米",
+    "prefecture": "栃木県",
+    "brewery": "若駒酒造",
+    "url": "",
+    "description": "無濾過生原酒
+酒袋に丁寧に詰められて。槽に並べられ圧をかけずに搾った部分になります。",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "五百石",
+    "riceForMakingKoji": "五百石",
+    "ricePolishingRate": "80",
+    "alcoholContent": "16.5",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2016-12-29T12:16:20.933Z"
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677c7f",
+    "brand": "仙禽",
+    "subname": "葵日光",
+    "type": "純米",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/236",
+    "description": "ふっくらと炊き上がったご飯のような印象の純米酒。ほどよい旨味が特徴。最初に甘味も感じるが、後味は辛口に。 ",
+    "starterCulture": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "78",
+    "alcoholContent": "15",
+    "sakeMeterValue": "",
+    "acidity": "1.8",
+    "aminoAcidContent": "1.2",
+    "date": "2017-01-02T04:47:05.319Z"
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677d1b",
+    "brand": "仙禽",
+    "subname": "50 fire",
+    "type": "純米大吟醸",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/397",
+    "description": "厚みのある南国フルーツや穀物の香りが複雑に展開。やや甘さと酸味を感じさせる凝縮感のある繊細で複雑な味わい。 ",
+    "starterCulture": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-01-02T04:47:31.370Z"
+  },
+  {
+    "_id": "57fe4a2b68595fc7ba677bc4",
+    "brand": "仙禽",
+    "subname": "15年古酒",
+    "type": "特別本醸造",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "https://www.sake-sennin.com/fbo/web/app.php/user/product/14",
+    "description": "",
+    "starterCulture": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-01-02T04:47:52.752Z"
+  },
+  {
+    "_id": "5869dcbd394da300117ed173",
+    "brand": "仙禽",
+    "subname": "ナチュール　キャトル",
+    "type": "純米",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "",
+    "description": "ナチュールは、酵母に頼った現代の酒造りに対するアンチテーゼ。古代の技法へのオマージュは、蔵付き酵母によって再現された仙禽唯一無二のカタチ。亀ノ尾のエネルギーを十分に引き出し、仙禽にしか創り出す事の出来ない蔵付き酵母と組み合わせた、完全無添加（米と米麹と水のみ）の世界。超自然派日本酒です。",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "ドメーヌさくら亀の尾",
+    "riceForMakingKoji": "ドメーヌさくら亀の尾",
+    "ricePolishingRate": "90",
+    "alcoholContent": "14",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-01-02T06:10:31.191Z"
+  },
+  {
+    "_id": "58b6b06053d2ca00113d28be",
+    "brand": "仙禽",
+    "subname": "ドルチェ・ロッソ",
+    "type": "純米大吟醸",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "",
+    "description": "パリの春「踊り出すタマシイ｣
+ノンフィルター
+ドメーヌ。
+
+フランスのボルドーで培養されたワイン酵母を使用しています。その中でもRX60とは、フランスのボルドー等で使用され、カルベネソーヴィニヨン等、赤ワインのブドウ品種に使用されます。低アルコールながら、フルーティーでスパイシーなモダンスタイル赤ワインのような味わいは、日本酒新世界の幕開けです。",
+    "sakeYeast": "ボルドー培養ワイン酵母RX60",
+    "sakeRiceExceptForKojiMaking": "ドメーヌさくらひとごこち",
+    "riceForMakingKoji": "ドメーヌさくらひとごこち",
+    "ricePolishingRate": "50",
+    "alcoholContent": "12",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-03-01T11:28:30.320Z"
+  },
+  {
+    "_id": "58cdf9909f2cbe00113355f3",
+    "brand": "若駒",
+    "subname": "雄町70無加圧絞り",
+    "type": "純米",
+    "prefecture": "栃木県",
+    "brewery": "若駒酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "雄町",
+    "riceForMakingKoji": "雄町",
+    "ricePolishingRate": "70",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-03-19T03:22:54.115Z"
+  },
+  {
+    "_id": "58cdfc0f9f2cbe00113355f6",
+    "brand": "若駒",
+    "subname": "しずく搾り斗瓶採り",
+    "type": "純米",
+    "prefecture": "栃木県",
+    "brewery": "若駒酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-03-19T03:33:31.890Z"
+  },
+  {
+    "_id": "58ce942faeec7a0011c84dd7",
+    "brand": "仙禽",
+    "subname": "モダン仙禽 無垢",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "",
+    "description": "モダン仙禽無垢
+勵犐米米(国産)-米こうじ(国栃木県さくら
+メーヌさくら·山田錦(栃木県さくら市E
+コール分16度(原酒)
+)掛米:50%
+ソ人7, 無ろ過原酒,瓶囲い瓶火入れ
+タはすべての原料米に対して で水脈/or
+れる地下水(仕込
+を行いました
+ヌ化を
+土込み水)と同じ水脈上にあ
+lee,こおいて金や銀は)な 限や,
+は金や銀など混じり )ノ
+さい香丶美,町 であり、ま
+,,りま乀 论や銀は
+npfRI 『亀ノ尾/PPffERJj
+爽や
+dSENKIN.MUKU
+ださい。
+tivons du ris,
+ons, tele
+ource, dans laque
+rie de Senkin, nous cui (lars
+tivo:iaat
+d'eau de source.
+geDarfaitdurize
+ーーー!mariage partial
+rn-terranean water
+Ene do
+only,laine concept
+grow rice in
+to
+( ji llelcollece and water is
+ential
+.navour ofSenkin
+ってから 開
+意しましょう。
+ら市馬場!
+事---ii,
+と
+メじこ與
+カ
+こら
+すお nk sse in fol Suc
+すま
+寸1,銀てまをー, se
+てまをN… er in ri le es-i es-
+dF
+名米合吩樣。
+",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "ドメーヌさくら、山田錦",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "50",
+    "alcoholContent": "16",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-03-19T14:22:37.396Z"
+  },
+  {
+    "_id": "58e7827feee32100113b0703",
+    "brand": "松の寿",
+    "subname": "純吟五百石しぼりたて生",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "松井酒造店",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-04-08T02:11:41.466Z"
+  },
+  {
+    "_id": "590d90cffe246a0011f0730b",
+    "brand": "鳳凰美田",
+    "subname": "無濾過本生",
+    "type": "純米吟醸",
+    "prefecture": "栃木県",
+    "brewery": "小林酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "",
+    "riceForMakingKoji": "",
+    "ricePolishingRate": "",
+    "alcoholContent": "",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-05-06T09:01:03.240Z"
+  },
+  {
+    "_id": "595a1040adfcf8001159d6d9",
+    "brand": "仙禽",
+    "subname": "かぶとむし",
+    "type": "純米大吟醸",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "山田錦",
+    "riceForMakingKoji": "山田錦",
+    "ricePolishingRate": "50",
+    "alcoholContent": "14",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2017-07-03T09:37:25.161Z"
+  },
+  {
+    "_id": "5bdd6f03dcc39c0012368380",
+    "brand": "仙禽",
+    "subname": "仙禽一聲",
+    "type": "純米大吟醸",
+    "prefecture": "栃木県",
+    "brewery": "仙禽酒造",
+    "url": "",
+    "description": "",
+    "sakeYeast": "",
+    "sakeRiceExceptForKojiMaking": "山田錦",
+    "riceForMakingKoji": "山田錦",
+    "ricePolishingRate": "35",
+    "alcoholContent": "16",
+    "sakeMeterValue": "",
+    "acidity": "",
+    "aminoAcidContent": "",
+    "date": "2018-11-03T09:48:50.051Z"
+  }
+]

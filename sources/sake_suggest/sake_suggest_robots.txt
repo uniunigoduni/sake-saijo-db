@@ -1,0 +1,20 @@
+User-Agent: AhrefsBot
+User-Agent: SemrushBot
+User-Agent: MJ12bot
+User-Agent: DotBot
+User-Agent: BLEXBot
+User-Agent: DataForSeoBot
+User-Agent: PetalBot
+User-Agent: serpstatbot
+User-Agent: ia_archiver
+User-Agent: archive.org_bot
+Disallow: /
+
+User-Agent: *
+Allow: /
+Disallow: /admin
+Disallow: /bookmarks
+Disallow: /api/
+Disallow: /compare?
+
+Sitemap: https://sake-suggest.com/sitemap.xml
