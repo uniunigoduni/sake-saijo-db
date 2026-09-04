@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jsake|日本酒データベース − 846銘柄の評価・味わい・相性で探せる</title>
+<meta name="description" content="編集長 丸山が試した日本酒銘柄をデータと味わいで紐解く、日本酒データベース。846銘柄を評価・味わいチャート・料理との相性から検索。好みの一本が見つかる日本酒診断テストも。">
+<link rel="canonical" href="https://jsake.jp/">
+<link rel="alternate" type="application/rss+xml" href="/feed.xml">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jsake">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/style.css?v=b33c16eb">
+</head>
+<body>
+
+<header class="sake-header">
+  <div class="sake-header-inner">
+    <div class="sake-brand">
+      <a href="/"><span class="sake-brand-kanji">酒</span>Jsake</a>
+    </div>
+    <nav class="sake-nav">
+      <a href="/">ホーム</a>
+      <a href="/items/">銘柄一覧</a>
+      <a href="/ranking/">ランキング</a>
+      <a href="/shindan/">診断</a>
+      <a href="/tags/">タグ</a>
+      <a href="/about/">編集部</a>
+    </nav>
+  </div>
+</header>
+
+<form class="sake-search-bar" action="/search/" method="get">
+  <div class="sake-search-inner">
+    <input class="sake-search-input" type="search" name="q" placeholder="銘柄名・蔵元・産地で検索…" autocomplete="off">
+    <button class="sake-search-btn" type="submit">検索</button>
+  </div>
+</form>
+
+<section class="sake-hero">
+  <h1>Jsake</h1>
+  <p class="sake-hero-sub">編集長 丸山が試した日本酒銘柄をデータと味わいで紐解く、日本酒データベース</p>
+  <div class="sake-hero-stats">
+    <div>
+      <div class="sake-hero-stat-num">846</div>
+      <div class="sake-hero-stat-label">SAKE</div>
+    </div>
+    <div>
+      <div class="sake-hero-stat-num">619</div>
+      <div class="sake-hero-stat-label">BREWERIES</div>
+    </div>
+    <div>
+      <div class="sake-hero-stat-num">43</div>
+      <div class="sake-hero-stat-label">PREFECTURES</div>
+    </div>
+  </div>
+</section>
+
+<main class="sake-main">
+
+  <nav class="sake-quicknav" aria-label="探し方">
+    <a class="sake-quicknav-card" href="#bunrui">
+      <span class="sake-quicknav-icon">🍶</span>
+      <span class="sake-quicknav-label">分類から探す</span>
+      <span class="sake-quicknav-sub">純米吟醸・大吟醸ほか</span>
+    </a>
+    <a class="sake-quicknav-card" href="#sanchi">
+      <span class="sake-quicknav-icon">🗾</span>
+      <span class="sake-quicknav-label">産地から探す</span>
+      <span class="sake-quicknav-sub">43都道府県</span>
+    </a>
+    <a class="sake-quicknav-card" href="/ranking/">
+      <span class="sake-quicknav-icon">🏆</span>
+      <span class="sake-quicknav-label">テーマ別ランキング</span>
+      <span class="sake-quicknav-sub">シーン・味わいで選ぶ</span>
+    </a>
+    <a class="sake-quicknav-card sake-quicknav-card--accent" href="/shindan/">
+      <span class="sake-quicknav-icon">🔮</span>
+      <span class="sake-quicknav-label">日本酒診断</span>
+      <span class="sake-quicknav-sub">3分であなたの一杯</span>
+    </a>
+  </nav>
+
+  <h2 class="sake-section-title">編集長 おすすめの一杯</h2>
+  <div class="sake-grid">
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/juyondai-nakadori-1.jpg" alt="十四代 中取り純米吟醸" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">山形県</div>
+        <h3 class="sake-card-name"><a href="/items/juyondai-nakadori/">十四代 中取り純米吟醸</a></h3>
+        <div class="sake-card-brewery">高木酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米吟醸</span>
+          <span class="sake-tag">山田錦</span>
+        </div>
+        <div class="sake-card-rating">
+          <span class="sake-card-rating-value">★ 4.9</span>
+          <span class="sake-card-rating-stars">★★★★☆</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/jikon-junmai-ginjo-1.jpg" alt="而今 純米吟醸" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">三重県</div>
+        <h3 class="sake-card-name"><a href="/items/jikon-junmai-ginjo/">而今 純米吟醸</a></h3>
+        <div class="sake-card-brewery">木屋正酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米吟醸</span>
+          <span class="sake-tag">山田錦</span>
+        </div>
+        <div class="sake-card-rating">
+          <span class="sake-card-rating-value">★ 4.8</span>
+          <span class="sake-card-rating-stars">★★★★☆</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/aramasa-no6-1.jpg" alt="新政 No.6 S-type" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">秋田県</div>
+        <h3 class="sake-card-name"><a href="/items/aramasa-no6/">新政 No.6 S-type</a></h3>
+        <div class="sake-card-brewery">新政酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米吟醸</span>
+          <span class="sake-tag">酒造好適米(秋田産)</span>
+        </div>
+        <div class="sake-card-rating">
+          <span class="sake-card-rating-value">★ 4.7</span>
+          <span class="sake-card-rating-stars">★★★★☆</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/dassai-23-1.jpg" alt="獺祭 純米大吟醸 磨き二割三分" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">山口県</div>
+        <h3 class="sake-card-name"><a href="/items/dassai-23/">獺祭 純米大吟醸 磨き二割三分</a></h3>
+        <div class="sake-card-brewery">旭酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米大吟醸</span>
+          <span class="sake-tag">山田錦</span>
+        </div>
+        <div class="sake-card-rating">
+          <span class="sake-card-rating-value">★ 4.7</span>
+          <span class="sake-card-rating-stars">★★★★☆</span>
+        </div>
+      </div>
+    </article>
+    
+  </div>
+
+  <h2 class="sake-section-title">新着銘柄</h2>
+  <div class="sake-grid">
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/daishichi-classic-1.jpg" alt="大七 純米生酛 CLASSIC" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">福島県</div>
+        <h3 class="sake-card-name"><a href="/items/daishichi-classic/">大七 純米生酛 CLASSIC</a></h3>
+        <div class="sake-card-brewery">大七酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">生酛純米</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/daishichi-kaiden-1.jpg" alt="大七 皆伝 純米吟醸" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">福島県</div>
+        <h3 class="sake-card-name"><a href="/items/daishichi-kaiden/">大七 皆伝 純米吟醸</a></h3>
+        <div class="sake-card-brewery">大七酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米吟醸</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/daishichi-kimoto-hiyaoroshi-1.jpg" alt="大七 純米生酛 ひやおろし" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">福島県</div>
+        <h3 class="sake-card-name"><a href="/items/daishichi-kimoto-hiyaoroshi/">大七 純米生酛 ひやおろし</a></h3>
+        <div class="sake-card-brewery">大七酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">生酛純米</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/daishichi-minowamon-1.jpg" alt="大七 箕輪門 純米大吟醸" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">福島県</div>
+        <h3 class="sake-card-name"><a href="/items/daishichi-minowamon/">大七 箕輪門 純米大吟醸</a></h3>
+        <div class="sake-card-brewery">大七酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米大吟醸</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/daishichi-myoka-rangyoku-1.png" alt="大七 妙花闌曲 純米大吟醸" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">福島県</div>
+        <h3 class="sake-card-name"><a href="/items/daishichi-myoka-rangyoku/">大七 妙花闌曲 純米大吟醸</a></h3>
+        <div class="sake-card-brewery">大七酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米大吟醸</span>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sake-card reveal">
+      <div class="sake-card-image">
+        <img src="/assets/daishinshu-cho-karakuchi-1.jpg" alt="大信州 超辛口 純米吟醸" loading="lazy">
+      </div>
+      <div class="sake-card-body">
+        <div class="sake-card-prefecture">長野県</div>
+        <h3 class="sake-card-name"><a href="/items/daishinshu-cho-karakuchi/">大信州 超辛口 純米吟醸</a></h3>
+        <div class="sake-card-brewery">大信州酒造</div>
+        <div class="sake-card-tags">
+          <span class="sake-tag">純米吟醸</span>
+        </div>
+      </div>
+    </article>
+    
+  </div>
+
+  <h2 class="sake-section-title" id="ranking">テーマ別ランキング</h2>
+  <div class="sake-ranking-grid">
+    
+    <a class="sake-ranking-card reveal" href="/ranking/rich-bold/">
+      <div class="sake-ranking-card-icon">💪</div>
+      <div class="sake-ranking-card-title">芳醇辛口で日本酒の力強さを楽しむ</div>
+      <div class="sake-ranking-card-desc">米の旨みがしっかり感じられ、辛口の骨格を持つ銘柄を編集長がセレクト。燗酒にも向く力強い味わい。</div>
+      <div class="sake-ranking-card-count">5銘柄 →</div>
+    </a>
+    
+    <a class="sake-ranking-card reveal" href="/ranking/fish-pairing/">
+      <div class="sake-ranking-card-icon">🐟</div>
+      <div class="sake-ranking-card-title">魚料理に合う日本酒</div>
+      <div class="sake-ranking-card-desc">刺身や焼き魚と相性が良い、淡麗で繊細な銘柄を集めました。和食の食中酒として最適。</div>
+      <div class="sake-ranking-card-count">6銘柄 →</div>
+    </a>
+    
+    <a class="sake-ranking-card reveal" href="/ranking/fruity-ginjo/">
+      <div class="sake-ranking-card-icon">🍇</div>
+      <div class="sake-ranking-card-title">華やかな吟醸香で選ぶ日本酒</div>
+      <div class="sake-ranking-card-desc">メロン・洋ナシ・パイナップル系の華やかな吟醸香が魅力。日本酒初心者にも勧めやすい1本。</div>
+      <div class="sake-ranking-card-count">6銘柄 →</div>
+    </a>
+    
+    <a class="sake-ranking-card reveal" href="/ranking/modern-natural/">
+      <div class="sake-ranking-card-icon">🌿</div>
+      <div class="sake-ranking-card-title">現代的なナチュラル系日本酒</div>
+      <div class="sake-ranking-card-desc">酸とジューシーな甘旨で、ワインのように楽しめる新世代の日本酒。</div>
+      <div class="sake-ranking-card-count">5銘柄 →</div>
+    </a>
+    
+    <a class="sake-ranking-card reveal" href="/ranking/kanzake/">
+      <div class="sake-ranking-card-icon">♨️</div>
+      <div class="sake-ranking-card-title">燗酒で本領発揮する銘柄</div>
+      <div class="sake-ranking-card-desc">ぬる燗〜熱燗で米の旨みが膨らむ、燗酒適性の高い銘柄。冬の鍋料理と相性抜群。</div>
+      <div class="sake-ranking-card-count">4銘柄 →</div>
+    </a>
+    
+    <a class="sake-ranking-card reveal" href="/ranking/kosupa/">
+      <div class="sake-ranking-card-icon">💎</div>
+      <div class="sake-ranking-card-title">コストパフォーマンス最強の純米吟醸/大吟醸</div>
+      <div class="sake-ranking-card-desc">3,000円台で買えるのに純米吟醸・純米大吟醸クラスの完成度。日常使いに最適。</div>
+      <div class="sake-ranking-card-count">5銘柄 →</div>
+    </a>
+    
+  </div>
+
+  <h2 class="sake-section-title" id="sanchi">産地から探す</h2>
+  <div class="sake-filter-inner" style="padding: 0;">
+    
+    <a class="sake-filter-chip" href="/category/niigata/">新潟県(57)</a>
+    
+    <a class="sake-filter-chip" href="/category/yamagata/">山形県(56)</a>
+    
+    <a class="sake-filter-chip" href="/category/fukushima/">福島県(43)</a>
+    
+    <a class="sake-filter-chip" href="/category/akita/">秋田県(39)</a>
+    
+    <a class="sake-filter-chip" href="/category/shizuoka/">静岡県(35)</a>
+    
+    <a class="sake-filter-chip" href="/category/hiroshima/">広島県(35)</a>
+    
+    <a class="sake-filter-chip" href="/category/nagano/">長野県(35)</a>
+    
+    <a class="sake-filter-chip" href="/category/aichi/">愛知県(32)</a>
+    
+    <a class="sake-filter-chip" href="/category/mie/">三重県(28)</a>
+    
+    <a class="sake-filter-chip" href="/category/nara/">奈良県(28)</a>
+    
+    <a class="sake-filter-chip" href="/category/tochigi/">栃木県(27)</a>
+    
+    <a class="sake-filter-chip" href="/category/ishikawa/">石川県(27)</a>
+    
+    <a class="sake-filter-chip" href="/category/miyagi/">宮城県(24)</a>
+    
+    <a class="sake-filter-chip" href="/category/gifu/">岐阜県(24)</a>
+    
+    <a class="sake-filter-chip" href="/category/yamaguchi/">山口県(24)</a>
+    
+    <a class="sake-filter-chip" href="/category/wakayama/">和歌山県(23)</a>
+    
+    <a class="sake-filter-chip" href="/category/hyogo/">兵庫県(21)</a>
+    
+    <a class="sake-filter-chip" href="/category/fukui/">福井県(21)</a>
+    
+    <a class="sake-filter-chip" href="/category/ibaraki/">茨城県(20)</a>
+    
+    <a class="sake-filter-chip" href="/category/saitama/">埼玉県(20)</a>
+    
+    <a class="sake-filter-chip" href="/category/saga/">佐賀県(18)</a>
+    
+    <a class="sake-filter-chip" href="/category/shiga/">滋賀県(17)</a>
+    
+    <a class="sake-filter-chip" href="/category/toyama/">富山県(16)</a>
+    
+    <a class="sake-filter-chip" href="/category/aomori/">青森県(15)</a>
+    
+    <a class="sake-filter-chip" href="/category/kyoto/">京都府(15)</a>
+    
+    <a class="sake-filter-chip" href="/category/gunma/">群馬県(14)</a>
+    
+    <a class="sake-filter-chip" href="/category/chiba/">千葉県(14)</a>
+    
+    <a class="sake-filter-chip" href="/category/iwate/">岩手県(13)</a>
+    
+    <a class="sake-filter-chip" href="/category/fukuoka/">福岡県(13)</a>
+    
+    <a class="sake-filter-chip" href="/category/hokkaido/">北海道(13)</a>
+    
+    <a class="sake-filter-chip" href="/category/shimane/">島根県(13)</a>
+    
+    <a class="sake-filter-chip" href="/category/kochi/">高知県(12)</a>
+    
+    <a class="sake-filter-chip" href="/category/okayama/">岡山県(11)</a>
+    
+    <a class="sake-filter-chip" href="/category/kanagawa/">神奈川県(9)</a>
+    
+    <a class="sake-filter-chip" href="/category/tokyo/">東京都(7)</a>
+    
+    <a class="sake-filter-chip" href="/category/yamanashi/">山梨県(6)</a>
+    
+    <a class="sake-filter-chip" href="/category/osaka/">大阪府(5)</a>
+    
+    <a class="sake-filter-chip" href="/category/kagawa/">香川県(5)</a>
+    
+    <a class="sake-filter-chip" href="/category/tottori/">鳥取県(4)</a>
+    
+    <a class="sake-filter-chip" href="/category/kumamoto/">熊本県(2)</a>
+    
+    <a class="sake-filter-chip" href="/category/ehime/">愛媛県(2)</a>
+    
+    <a class="sake-filter-chip" href="/category/tokushima/">徳島県(2)</a>
+    
+    <a class="sake-filter-chip" href="/category/oita/">大分県(1)</a>
+    
+  </div>
+
+  <h2 class="sake-section-title" id="bunrui">分類から探す</h2>
+  <div class="sake-filter-inner" style="padding: 0;">
+    
+    <a class="sake-filter-chip" href="/category/type-junmai-ginjo/">純米吟醸(355)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-junmai/">純米(283)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-junmai-daiginjo/">純米大吟醸(97)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-tokubetsu-junmai/">特別純米(48)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-yamahai-junmai/">山廃純米(16)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-cat-a3752b7f/">本醸造(13)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-daiginjo/">大吟醸(12)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-cat-e0c227fe/">純米酒(9)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-cat-b5768509/">吟醸(7)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-kimoto-junmai/">生酛純米(5)</a>
+    
+    <a class="sake-filter-chip" href="/category/type-cat-59651c27/">特別純米酒(1)</a>
+    
+  </div>
+
+</main>
+
+<footer class="sake-footer">
+  <div class="sake-footer-inner">
+    <div class="sake-footer-grid">
+      <div>
+        <h4>Jsakeについて</h4>
+        <p class="sake-footer-tagline">編集長 丸山が試した日本酒銘柄をデータと味わいで紐解く、日本酒データベース</p>
+      </div>
+      <div>
+        <h4>サイト情報</h4>
+        <p><a href="/about/">編集部</a></p>
+        <p><a href="/privacy/">プライバシー</a></p>
+      </div>
+      <div>
+        <h4>更新情報</h4>
+        <p><a href="/feed.xml">RSSフィード</a></p>
+        <p><a href="/sitemap.xml">サイトマップ</a></p>
+      </div>
+    </div>
+    <div class="sake-footer-copy">&copy; 2026 Jsake</div>
+      <div class="author-footer" style="font-size:0.78rem;opacity:0.75;margin-top:0.6rem;">編集長 丸山 / since 2026</div>
+  </div>
+</footer>
+
+<script src="/anim.js?v=b33c16eb"></script>
+<!-- pixel: jsake -->
+</body>
+</html>

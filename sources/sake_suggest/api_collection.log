@@ -1,0 +1,12 @@
+[2026-09-04T21:58:17.820058+00:00] 25/265 pages checked; failures=0
+[2026-09-04T21:58:17.834571+00:00] 50/265 pages checked; failures=0
+[2026-09-04T21:58:17.847122+00:00] 75/265 pages checked; failures=0
+[2026-09-04T21:58:17.861415+00:00] 100/265 pages checked; failures=0
+[2026-09-04T21:58:39.022970+00:00] 125/265 pages checked; failures=0
+[2026-09-04T21:59:25.329266+00:00] 150/265 pages checked; failures=0
+[2026-09-04T22:00:12.237190+00:00] 175/265 pages checked; failures=0
+[2026-09-04T22:00:52.858684+00:00] 200/265 pages checked; failures=0
+[2026-09-04T22:01:36.094165+00:00] 225/265 pages checked; failures=0
+[2026-09-04T22:02:22.203643+00:00] 250/265 pages checked; failures=0
+[2026-09-04T22:02:47.829006+00:00] 265/265 pages checked; failures=0
+[2026-09-04T22:02:47.831006+00:00] finished pages=265/265 items=7948 expected=7948
