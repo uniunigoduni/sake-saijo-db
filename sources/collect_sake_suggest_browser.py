@@ -74,11 +74,12 @@ def click_and_capture(page, button_text: str, target_page: int, total_pages: int
     before = len(responses)
     page.get_by_role("button", name=button_text, exact=True).click()
     wait_page(page, target_page, total_pages)
-    page.wait_for_timeout(800)
-    candidates = [r for r in responses[before:] if f"page={target_page}" in r.url]
-    if not candidates:
-        page.wait_for_timeout(2500)
+    candidates = []
+    for _ in range(60):
         candidates = [r for r in responses[before:] if f"page={target_page}" in r.url]
+        if candidates:
+            break
+        page.wait_for_timeout(500)
     if not candidates:
         raise RuntimeError(f"API response not captured for page {target_page}")
     save_api(candidates[-1], target_page)
