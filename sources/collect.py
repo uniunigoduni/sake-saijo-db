@@ -50,22 +50,27 @@ def session() -> requests.Session:
     s.headers.update({"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate"})
     return s
 
-def fetch_bytes(url: str, retries: int = 5, timeout: tuple[int, int] = (15, 90)):
+def fetch_bytes(url: str, retries: int = 3, timeout: tuple[int, int] = (15, 90)):
     last = None
+    last_response = None
     for attempt in range(retries):
         try:
             r = session().get(url, timeout=timeout, allow_redirects=True)
             if r.status_code == 429 or 500 <= r.status_code < 600:
-                wait = min(30, 2 ** attempt + random.random())
-                log(f"retry {r.status_code} {url} in {wait:.1f}s")
-                time.sleep(wait)
-                last = RuntimeError(f"HTTP {r.status_code}")
-                continue
+                last_response = r
+                if attempt + 1 < retries:
+                    wait = min(15, 2 ** attempt + random.random())
+                    log(f"retry {r.status_code} {url} in {wait:.1f}s")
+                    time.sleep(wait)
+                    continue
+                return r
             return r
         except Exception as e:
             last = e
             if attempt + 1 < retries:
-                time.sleep(min(30, 2 ** attempt + random.random()))
+                time.sleep(min(15, 2 ** attempt + random.random()))
+    if last_response is not None:
+        return last_response
     raise last or RuntimeError("fetch failed")
 
 
