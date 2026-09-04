@@ -101,7 +101,7 @@ def main() -> None:
             else:
                 route.continue_()
         page.route("**/*", route_handler)
-        page.goto("https://sake-suggest.com/", wait_until="domcontentloaded", timeout=60000)
+        page.goto("https://sake-suggest.com/", wait_until="networkidle", timeout=60000)
         page.get_by_role("button", name="次へ", exact=True).wait_for(timeout=30000)
         text = page.locator("main").inner_text()
         marker = next(line for line in text.splitlines() if " / " in line and line.split(" / ")[0].isdigit())
