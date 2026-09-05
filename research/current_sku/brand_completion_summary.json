@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-05",
+  "generated": "2026-09-06",
   "checks": {
     "A_complete": true,
     "A_50_of_50": true,
@@ -9,6 +9,9 @@
     "sanyotsuru_honto": true,
     "hakubotan_daiginjo_sizes": true,
     "no_cokun_plus": true,
+    "kamotsuru_current_major_complete": true,
+    "itteki_distinct_from_generic": true,
+    "itteki_current_sizes": true,
     "xlsx_brand_sheets": true
   },
   "xlsx": [

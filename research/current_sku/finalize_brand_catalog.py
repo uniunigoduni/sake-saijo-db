@@ -10,7 +10,7 @@ import build_boss_exports as old
 
 ROOT=Path(r'C:\Users\tarou\Downloads\sake-saijo-db')
 DIR=ROOT/'research'/'current_sku'; WEB_DIR=ROOT/'research'/'web'
-TODAY='2026-09-05'; JST=timezone(timedelta(hours=9))
+TODAY='2026-09-06'; JST=timezone(timedelta(hours=9))
 AREAS=old.AREAS
 CORE=pd.read_csv(DIR/'brand_core_seed.csv',encoding='utf-8-sig').fillna('')
 REGISTRY=pd.read_csv(DIR/'brand_registry_seed.csv',encoding='utf-8-sig').fillna('')
@@ -33,20 +33,27 @@ def clean(v): return ' '.join(str(v).replace('　',' ').split()) if v not in (No
 def norm(v):
     s=unicodedata.normalize('NFKC',clean(v)).casefold()
     s=re.sub(r'[【】\[\]（）()「」『』〈〉<>・･\s]','',s)
-    s=s.replace('日本酒','')
+    for x in ['日本酒','取扱い店限定酒','蔵元限定酒','季節限定酒','数量限定','再販','スパークリング']:
+        s=s.replace(x.casefold(),'')
     s=re.sub(r'\d+(?:\.\d+)?(?:ml|l)','',s)
+    s=re.sub(r'製造年月\d{4}年\d{1,2}月','',s)
+    s=re.sub(r'(?:共通)?(?:化粧箱|木箱)入(?:り)?','',s)
+    s=re.sub(r'[a-z]{1,4}-[a-z0-9]+','',s)
     for x in ['賀茂鶴','白牡丹','西條鶴','西条鶴','亀齢','福美人','賀茂泉','富久長','山陽鶴']:
         if s.startswith(x.casefold()): s=s[len(x):]
     for x in ['瓶詰','福美人酒造株式会社','恵比寿庫えびすぐら','白牡丹酒造','福美人']:
         s=s.replace(x.casefold(),'')
     s=s.replace('特別純米辛口','辛口特別純米')
+    if s == '山吹色の酒': s = '純米吟醸山吹色の酒'
+    if s == '朱泉本仕込': s = '純米吟醸朱泉本仕込'
     return s
 
 def match_score(a,b):
     a,b=norm(a),norm(b)
     if not a or not b: return 0.0
     sc=SequenceMatcher(None,a,b).ratio()
-    if min(len(a),len(b))>=4 and (a in b or b in a): sc=max(sc,0.94)
+    length_ratio=min(len(a),len(b))/max(len(a),len(b))
+    if min(len(a),len(b))>=4 and length_ratio>=0.65 and (a in b or b in a): sc=max(sc,0.94)
     return sc
 
 def save_source(brewery,url,stype):
@@ -302,6 +309,10 @@ def qa(products,bm,registry,main,summary):
       'sanyotsuru_honto':bool(((allp['酒蔵']=='山陽鶴酒造') & allp['商品名'].str.contains('ほんと',regex=False)).any()),
       'hakubotan_daiginjo_sizes':bool(((allp['酒蔵']=='白牡丹酒造') & (allp['商品名']=='大吟醸') & allp['容量'].str.contains('720ml',regex=False) & allp['容量'].str.contains('1,800ml',regex=False)).any()),
       'no_cokun_plus':not allp['商品名'].str.contains(r'COKUN\+',regex=True).any(),
+      'kamotsuru_current_major_complete':all(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']==name)).any() for name in [
+          '純米吟醸 一滴入魂','賀茂鶴 光壽','純米大吟醸 瑞兆賀茂鶴','大吟醸 吉祥 賀茂鶴','大吟醸 天凜','大吟醸 吟凛雅','酒中在心 鶯 純米大吟醸 山田錦']),
+      'itteki_distinct_from_generic':bool(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']=='純米吟醸 一滴入魂')).any()) and bool(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']=='純米吟醸')).any()),
+      'itteki_current_sizes':bool(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']=='純米吟醸 一滴入魂') & allp['容量'].str.contains('300ml',regex=False) & allp['容量'].str.contains('720ml',regex=False) & allp['容量'].str.contains('1,800ml',regex=False)).any()),
     }
     xlsx=[]
     for area in AREAS:
@@ -338,7 +349,7 @@ def update_readme(summary,products):
 - **B**: 主要定番、高級ライン、別ブランド、注目シリーズ
 - **C**: その他の現行商品・季節商品・限定商品
 
-2026-09-05時点で、Aランクは **{summary['A_covered']}/{summary['A_required']}件収録済み**です。Aは各蔵5件、計50件を必須チェックにしています。
+2026-09-06時点で、Aランクは **{summary['A_covered']}/{summary['A_required']}件収録済み**です。Aは各蔵5件、計50件を必須チェックにしています。
 個別販売SKUまで公開確認できたA銘柄は {summary['A_sku_confirmed']}件です。SKU未確認は「銘柄欠落」ではなく、蔵元が代表酒として公開している一方で容量・JAN等の個別販売情報が公開されていないケースとして区別します。
 
 ## データ構造とルール
