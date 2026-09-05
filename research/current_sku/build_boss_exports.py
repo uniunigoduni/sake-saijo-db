@@ -1,12 +1,8 @@
 from __future__ import annotations
 from pathlib import Path
-import json, math, re
+import json, re
 from difflib import SequenceMatcher
 import pandas as pd
-from openpyxl import Workbook
-from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
-from openpyxl.utils import get_column_letter
-from openpyxl.worksheet.table import Table, TableStyleInfo
 
 ROOT = Path(r"C:\Users\tarou\Downloads\sake-saijo-db")
 WEB_DIR = ROOT / "research" / "web"
@@ -373,113 +369,21 @@ def choose_main(df, breweries):
     cols=["酒蔵","商品名","分類","甘辛目安","日本酒度","おすすめの飲み方","容量","流通区分","選定理由","出典URL"]
     return pd.DataFrame(out)[cols] if out else pd.DataFrame(columns=cols)
 
-NAVY = "17365D"; BLUE = "2F75B5"; LIGHT = "D9EAF7"; PALE = "F3F6F9"; WHITE = "FFFFFF"; GRAY = "666666"
-THIN = Side(style="thin", color="D9E1F2")
-
-def setup_sheet(ws, title, subtitle, headers, rows):
-    ws.sheet_view.showGridLines = False
-    end_col = max(1, len(headers))
-    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=end_col)
-    c = ws.cell(1,1,title); c.font=Font(size=16,bold=True,color=WHITE); c.fill=PatternFill("solid",fgColor=NAVY); c.alignment=Alignment(vertical="center")
-    ws.row_dimensions[1].height = 28
-    ws.merge_cells(start_row=2,start_column=1,end_row=2,end_column=end_col)
-    c=ws.cell(2,1,subtitle); c.font=Font(size=9,color=GRAY); c.alignment=Alignment(wrap_text=True,vertical="center")
-    ws.row_dimensions[2].height=30
-    for j,h in enumerate(headers,1):
-        cell=ws.cell(4,j,h); cell.font=Font(bold=True,color=WHITE); cell.fill=PatternFill("solid",fgColor=BLUE); cell.alignment=Alignment(horizontal="center",vertical="center",wrap_text=True); cell.border=Border(bottom=THIN)
-    for i,row in enumerate(rows,5):
-        for j,v in enumerate(row,1):
-            cell=ws.cell(i,j,"" if v is None or (isinstance(v,float) and math.isnan(v)) else v)
-            cell.alignment=Alignment(vertical="top",wrap_text=True)
-            cell.border=Border(bottom=THIN)
-            if i%2==0: cell.fill=PatternFill("solid",fgColor=PALE)
-    if rows:
-        ref=f"A4:{get_column_letter(end_col)}{4+len(rows)}"
-        tab=Table(displayName=f"T_{abs(hash(title))%1000000}", ref=ref)
-        tab.tableStyleInfo=TableStyleInfo(name="TableStyleMedium2",showFirstColumn=False,showLastColumn=False,showRowStripes=False,showColumnStripes=False)
-        ws.add_table(tab)
-    ws.freeze_panes="A5"
-    ws.auto_filter.ref=f"A4:{get_column_letter(end_col)}{4+max(1,len(rows))}"
-
-def widths(ws, mapping):
-    for col,w in mapping.items(): ws.column_dimensions[col].width=w
-
-def add_url_links(ws, header_row=4):
-    headers={ws.cell(header_row,c).value:c for c in range(1,ws.max_column+1)}
-    for header in ["出典URL","飲み方出典URL"]:
-        col=headers.get(header)
-        if not col: continue
-        for r in range(header_row+1,ws.max_row+1):
-            cell=ws.cell(r,col)
-            if isinstance(cell.value,str) and cell.value.startswith("http"):
-                cell.hyperlink=cell.value; cell.style="Hyperlink"
-
-def build_summary_sheet(wb, area, df, breweries):
-    ws=wb.active; ws.title="概要"; ws.sheet_view.showGridLines=False
-    ws.merge_cells("A1:H1"); ws["A1"]=f"東広島市 {area} 日本酒リスト"; ws["A1"].font=Font(size=18,bold=True,color=WHITE); ws["A1"].fill=PatternFill("solid",fgColor=NAVY); ws["A1"].alignment=Alignment(vertical="center"); ws.row_dimensions[1].height=32
-    lines=[
-        "対象：現在販売中と確認できる一般流通の独立商品。容量・包装違いは商品単位に統合。",
-        "除外：酒まつり限定、記念酒、鑑評会出品酒、直売所記念品、ギフトセット等。流通限定・取扱店限定は市場流通品として残しています。",
-        "甘辛目安：蔵元等の明示がない場合、日本酒度を参考に便宜上分類。酸度等により実際の味覚は異なるため『目安』です。",
-        "おすすめの飲み方：公開出典の推奨を優先。一部は現行飲食店の提供温度を『提供例』と明記。根拠がないものは『要確認』です。",
-    ]
-    for i,t in enumerate(lines,3):
-        ws.merge_cells(start_row=i,start_column=1,end_row=i,end_column=8); ws.cell(i,1,t).alignment=Alignment(wrap_text=True,vertical="top"); ws.cell(i,1).font=Font(size=10)
-    ws["A8"]="酒蔵"; ws["B8"]="掲載商品数"; ws["C8"]="うち飲み方確認済"
-    for c in ws[8]: c.font=Font(bold=True,color=WHITE); c.fill=PatternFill("solid",fgColor=BLUE); c.alignment=Alignment(horizontal="center")
-    for i,b in enumerate(breweries,9):
-        g=df[df["酒蔵"]==b]; ws.cell(i,1,b); ws.cell(i,2,len(g)); ws.cell(i,3,int((g["おすすめの飲み方"]!="要確認").sum()))
-    ws.column_dimensions["A"].width=28; ws.column_dimensions["B"].width=16; ws.column_dimensions["C"].width=20
-    for c in range(4,9): ws.column_dimensions[get_column_letter(c)].width=12
-
-def write_main_book(path, area, df, main, breweries):
-    wb=Workbook(); build_summary_sheet(wb,area,df,breweries)
-    ws=wb.create_sheet("主要銘柄")
-    headers=list(main.columns); rows=main.fillna("").values.tolist()
-    setup_sheet(ws,f"東広島市 {area} 主要日本酒一覧", "各酒蔵 最大5商品。人気順位ではなく、現行流通・酒質の幅・公開情報の充実度を基準に選定。",headers,rows)
-    widths(ws,{"A":18,"B":34,"C":16,"D":12,"E":12,"F":28,"G":18,"H":16,"I":38,"J":42}); add_url_links(ws)
-    crit=wb.create_sheet("選定基準"); setup_sheet(crit,"主要銘柄の選定基準","上司向けの俯瞰表として、同系統の商品だけに偏らないよう整理しています。",["基準","内容"],[
-        ["対象","現時点で販売中と確認できる一般流通商品"],
-        ["代表性","出典数や公式掲載状況を参考に、酒蔵を説明しやすい商品を優先"],
-        ["多様性","純米大吟醸・吟醸・純米・本醸造など分類が重複しすぎないよう選定"],
-        ["安定性","イベント限定・記念酒・直売所限定・季節商品は主要5選では優先しない"],
-        ["注意","本表は売上・人気ランキングではありません"],
-    ]); widths(crit,{"A":18,"B":80})
-    wb.save(path)
-def write_full_book(path, area, df, audit, breweries):
-    wb=Workbook(); build_summary_sheet(wb,area,df,breweries)
-    ws=wb.create_sheet("現行商品一覧")
-    show_cols=["酒蔵","商品名","分類","甘辛目安","甘辛判定根拠","日本酒度","精米歩合","アルコール度数","おすすめの飲み方","飲み方情報","飲み方出典URL","使用米","容量","参考価格","流通区分","備考","出典URL"]
-    data=df[show_cols].copy(); setup_sheet(ws,f"東広島市 {area} 現行日本酒一覧","容量・包装違いは統合済み。生のSKU一覧ではなく、上司説明用の商品単位です。",show_cols,data.fillna("").values.tolist())
-    widths(ws,{"A":18,"B":36,"C":16,"D":12,"E":22,"F":12,"G":14,"H":16,"I":28,"J":18,"K":20,"L":20,"M":18,"N":18,"O":36,"P":44}); add_url_links(ws)
-
-    agg=wb.create_sheet("分類別集計")
-    pivot=pd.crosstab(df["酒蔵"],df["分類"]).reindex(breweries,fill_value=0)
-    pheaders=["酒蔵"]+pivot.columns.tolist()+["合計"]
-    prows=[]
-    for b,row in pivot.iterrows(): prows.append([b]+[int(x) for x in row.tolist()]+[int(row.sum())])
-    setup_sheet(agg,f"東広島市 {area} 分類別集計","商品単位に丸めた後の件数です。",pheaders,prows)
-    for c in range(1,len(pheaders)+1): agg.column_dimensions[get_column_letter(c)].width=16
-
-    aud=wb.create_sheet("除外・統合一覧")
-    aheaders=list(audit.columns); arows=audit.fillna("").values.tolist()
-    setup_sheet(aud,"除外・統合一覧","SKU・包装・イベント品などを、上司向け本表へ載せない／統合した理由を残しています。",aheaders,arows)
-    widths(aud,{"A":18,"B":42,"C":12,"D":52,"E":36})
-    wb.save(path)
 
 def main():
     results={}
     for area, breweries in AREAS.items():
         df,audit=build_products(breweries)
         main_df=choose_main(df,breweries)
-        prefix=f"東広島市_{area}"
-        main_path=ROOT / f"{prefix}_主要日本酒一覧.xlsx"
-        full_path=ROOT / f"{prefix}_現行日本酒一覧.xlsx"
-        write_main_book(main_path,area,df,main_df,breweries)
-        write_full_book(full_path,area,df,audit,breweries)
-        results[area]={"products":len(df),"main":len(main_df),"audit":len(audit),"main_file":main_path.name,"full_file":full_path.name,"by_brewery":df["酒蔵"].value_counts().reindex(breweries,fill_value=0).to_dict()}
-        df.to_csv(SKU_DIR/f"boss_{area}_products.csv",index=False,encoding="utf-8-sig")
-        audit.to_csv(SKU_DIR/f"boss_{area}_audit.csv",index=False,encoding="utf-8-sig")
+        product_path=SKU_DIR/f"boss_{area}_products.csv"
+        audit_path=SKU_DIR/f"boss_{area}_audit.csv"
+        df.to_csv(product_path,index=False,encoding="utf-8-sig")
+        audit.to_csv(audit_path,index=False,encoding="utf-8-sig")
+        results[area]={
+            "products":len(df),"main":len(main_df),"audit":len(audit),
+            "product_file":product_path.name,"audit_file":audit_path.name,
+            "by_brewery":df["酒蔵"].value_counts().reindex(breweries,fill_value=0).to_dict(),
+        }
     (SKU_DIR/"boss_export_summary.json").write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps(results,ensure_ascii=False,indent=2))
 

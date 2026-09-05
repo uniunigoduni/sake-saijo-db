@@ -5,7 +5,6 @@ import csv, hashlib, json, re, unicodedata
 from difflib import SequenceMatcher
 import pandas as pd
 import requests
-from openpyxl import load_workbook
 import build_boss_exports as old
 
 ROOT=Path(r'C:\Users\tarou\Downloads\sake-saijo-db')
@@ -251,38 +250,44 @@ def make_main_core(bm,products,sku):
           '選定理由':c['位置づけ'],'出典URL':src})
     return pd.DataFrame(out)
 
-def remove_sheet(wb,name):
-    if name in wb.sheetnames: wb.remove(wb[name])
-
-def put_sheet(wb,name,title,subtitle,df,index):
-    remove_sheet(wb,name); ws=wb.create_sheet(name,index)
-    old.setup_sheet(ws,title,subtitle,list(df.columns),df.fillna('').values.tolist())
-    for j in range(1,len(df.columns)+1):
-        h=df.columns[j-1]
-        width=18
-        if h in ['商品名','中核銘柄']: width=34
-        elif h in ['位置づけ','選定理由']: width=46
-        elif 'URL' in h: width=42
-        elif h in ['おすすめの飲み方']: width=28
-        ws.column_dimensions[old.get_column_letter(j)].width=width
-    old.add_url_links(ws)
-
-def update_workbooks(products,bm,registry,main):
+def write_flat_csvs(products,main):
+    root_files=[]
+    base_cols=['酒蔵','ブランド','シリーズ','商品名','分類','甘辛目安','日本酒度','精米歩合','アルコール度数',
+               'おすすめの飲み方','使用米','容量','参考価格','流通区分','備考','出典URL']
     for area,breweries in AREAS.items():
-        subp=products[area].copy(); subb=bm[bm['酒蔵'].isin(breweries)].copy(); subr=registry[registry['酒蔵'].isin(breweries)].copy()
-        subm=main[main['酒蔵'].isin(breweries)].copy()
-        mp=ROOT/f'東広島市_{area}_主要日本酒一覧.xlsx'; fp=ROOT/f'東広島市_{area}_現行日本酒一覧.xlsx'
-        wb=load_workbook(mp)
-        put_sheet(wb,'ブランド一覧',f'東広島市 {area} ブランド一覧','主ブランド・別ブランド・主要シリーズを整理。',subr,1)
-        put_sheet(wb,'ブランド・中核銘柄',f'東広島市 {area} ブランド・中核銘柄','A＝絶対に落とさない代表・蔵元推奨等、B＝主要定番・高級・注目ライン。',subb,2)
-        put_sheet(wb,'主要銘柄',f'東広島市 {area} 主要日本酒一覧','各蔵Aランク5銘柄。売上順位ではなく、蔵元推奨・代表性・現行流通を優先。',subm,3)
-        wb.save(mp)
-        wb=load_workbook(fp)
-        put_sheet(wb,'ブランド一覧',f'東広島市 {area} ブランド一覧','主ブランド・別ブランド・主要シリーズを整理。',subr,1)
-        put_sheet(wb,'ブランド・中核銘柄',f'東広島市 {area} ブランド・中核銘柄','A＝絶対に落とさない代表・蔵元推奨等、B＝主要定番・高級・注目ライン。',subb,2)
-        show=['酒蔵','ブランド','シリーズ','ブランド優先度','ブランド位置づけ','商品名','分類','甘辛目安','甘辛判定根拠','日本酒度','精米歩合','アルコール度数','おすすめの飲み方','飲み方情報','飲み方出典URL','使用米','容量','参考価格','流通区分','備考','出典URL']
-        put_sheet(wb,'現行商品一覧',f'東広島市 {area} 現行日本酒一覧','ブランド→商品→SKUの階層で整理。容量・包装違いは商品単位に統合。',subp[show],3)
-        wb.save(fp)
+        source=products[area][base_cols].copy()
+        source.insert(3,'主要銘柄','')
+        for brewery in breweries:
+            used=set()
+            cores=main[main['酒蔵']==brewery]
+            candidate_idx=source.index[source['酒蔵']==brewery].tolist()
+            for _,c in cores.iterrows():
+                scored=sorted(((match_score(c['商品名'],source.at[i,'商品名']),i) for i in candidate_idx if i not in used),reverse=True)
+                if scored and scored[0][0] >= 0.70:
+                    _,i=scored[0]; used.add(i); source.at[i,'主要銘柄']='○'
+                    continue
+                row={k:'' for k in source.columns}
+                row.update({'酒蔵':c['酒蔵'],'ブランド':c['ブランド'],'シリーズ':c['シリーズ'],'主要銘柄':'○',
+                            '商品名':c['商品名'],'分類':c['分類'],'甘辛目安':c['甘辛目安'],'日本酒度':c['日本酒度'],
+                            'おすすめの飲み方':c['おすすめの飲み方'],'容量':c['容量'],'流通区分':c['流通区分'],
+                            '備考':'主要銘柄管理から統合。現行根拠は内部監査表を参照。','出典URL':c['出典URL']})
+                source=pd.concat([source,pd.DataFrame([row])],ignore_index=True)
+            if int(((source['酒蔵']==brewery) & (source['主要銘柄']=='○')).sum()) != 5:
+                raise RuntimeError(f"主要銘柄数が5件ではありません: {brewery}")
+        order={b:i for i,b in enumerate(breweries)}
+        source['_brew_order']=source['酒蔵'].map(order)
+        source['_main_order']=(source['主要銘柄']!='○').astype(int)
+        source=source.sort_values(['_brew_order','_main_order','分類','商品名']).drop(columns=['_brew_order','_main_order']).reset_index(drop=True)
+        out=ROOT/f'東広島市_{area}_現行日本酒一覧.csv'
+        df=source.rename(columns={'おすすめの飲み方':'飲み方'})
+        df.to_csv(out,index=False,encoding='utf-8-sig')
+        root_files.append({'area':area,'file':out.name,'rows':len(df),'main':int((df['主要銘柄']=='○').sum()),'columns':list(df.columns)})
+    bs=json.loads((DIR/'boss_export_summary.json').read_text(encoding='utf-8'))
+    for x in root_files:
+        bs[x['area']]['root_file']=x['file']; bs[x['area']]['root_products']=x['rows']
+    (DIR/'boss_export_summary.json').write_text(json.dumps(bs,ensure_ascii=False,indent=2),encoding='utf-8')
+    return root_files
+
 
 def write_summary(bm,registry,sku,main):
     a=bm[bm['優先度'].eq('A')]
@@ -314,19 +319,31 @@ def qa(products,bm,registry,main,summary):
       'itteki_distinct_from_generic':bool(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']=='純米吟醸 一滴入魂')).any()) and bool(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']=='純米吟醸')).any()),
       'itteki_current_sizes':bool(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']=='純米吟醸 一滴入魂') & allp['容量'].str.contains('300ml',regex=False) & allp['容量'].str.contains('720ml',regex=False) & allp['容量'].str.contains('1,800ml',regex=False)).any()),
     }
-    xlsx=[]
+    csv_outputs=[]
+    required_cols=['酒蔵','ブランド','主要銘柄','商品名','分類','飲み方','出典URL']
     for area in AREAS:
-        for kind in ['主要日本酒一覧','現行日本酒一覧']:
-            p=ROOT/f'東広島市_{area}_{kind}.xlsx'; wb=load_workbook(p,read_only=True)
-            xlsx.append({'file':p.name,'brand_sheets':all(s in wb.sheetnames for s in ['ブランド一覧','ブランド・中核銘柄'])}); wb.close()
-    checks['xlsx_brand_sheets']=all(x['brand_sheets'] for x in xlsx)
-    report={'generated':TODAY,'checks':checks,'xlsx':xlsx,'passed':all(checks.values())}
+        p=ROOT/f'東広島市_{area}_現行日本酒一覧.csv'
+        ok=p.exists()
+        cols=[]; rows=0
+        if ok:
+            c=pd.read_csv(p,encoding='utf-8-sig').fillna('')
+            cols=list(c.columns); rows=len(c)
+            main_ok=(c[c['主要銘柄']=='○'].groupby('酒蔵').size().reindex(AREAS[area],fill_value=0)==5).all()
+            dup_ok=not c.duplicated(['酒蔵','商品名']).any()
+            ok=all(x in cols for x in required_cols) and rows>=len(products[area]) and bool(main_ok) and bool(dup_ok)
+        csv_outputs.append({'file':p.name,'rows':rows,'flat_columns_ok':ok})
+    checks['flat_csv_outputs']=all(x['flat_columns_ok'] for x in csv_outputs)
+    checks['no_root_xlsx']=not any(ROOT.glob('東広島市_*日本酒一覧.xlsx'))
+    report={'generated':TODAY,'checks':checks,'csv':csv_outputs,'passed':all(checks.values())}
     (DIR/'brand_completion_summary.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     if not report['passed']: raise RuntimeError('QA failed: '+json.dumps(checks,ensure_ascii=False))
     return report
 
 def update_readme(summary,products):
-    counts={a:len(df) for a,df in products.items()}
+    counts={}
+    for area in AREAS:
+        p=ROOT/f'東広島市_{area}_現行日本酒一覧.csv'
+        counts[area]=len(pd.read_csv(p,encoding='utf-8-sig')) if p.exists() else 0
     text=f'''# sake-saijo-db
 
 東広島市の日本酒を、販売・取扱い・輸出検討に使える形へ整理する業務用データベースです。
@@ -334,12 +351,12 @@ def update_readme(summary,products):
 
 ## 提出・閲覧用ファイル
 
-ルートには上司・行政説明で直接使う4ファイルを置いています。
+ルートには上司・行政説明で直接使う2つのCSVを置いています。
 
-- `東広島市_西条エリア7蔵_主要日本酒一覧.xlsx` — 各蔵Aランク5銘柄
-- `東広島市_西条エリア7蔵_現行日本酒一覧.xlsx` — 商品単位 {counts.get('西条エリア7蔵',0)}件
-- `東広島市_安芸津・黒瀬エリア3蔵_主要日本酒一覧.xlsx` — 各蔵Aランク5銘柄
-- `東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.xlsx` — 商品単位 {counts.get('安芸津・黒瀬エリア3蔵',0)}件
+- `東広島市_西条エリア7蔵_現行日本酒一覧.csv` — 商品単位 {counts.get('西条エリア7蔵',0)}件
+- `東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.csv` — 商品単位 {counts.get('安芸津・黒瀬エリア3蔵',0)}件
+
+主要銘柄は別ファイル・別シートに分けず、`主要銘柄` 列に `○` を付けます。`○` で絞り込むと各蔵5銘柄、計50銘柄を確認できます。`ブランド`、`シリーズ`、`飲み方` も同じ商品行の列として保持します。
 
 西条エリアは賀茂鶴・白牡丹・西條鶴・亀齢・福美人・賀茂泉・山陽鶴、安芸津・黒瀬エリアは今田酒造本店・柄酒造・金光酒造です。
 
@@ -384,7 +401,7 @@ python research/current_sku/finalize_brand_catalog.py
 def main():
     sku=patch_sku_master(); update_sku_summary(sku); products=patch_products()
     bm=make_brand_master(products,sku); registry=make_registry(bm); main_df=make_main_core(bm,products,sku)
-    update_workbooks(products,bm,registry,main_df)
+    root_files=write_flat_csvs(products,main_df)
     summary=write_summary(bm,registry,sku,main_df); report=qa(products,bm,registry,main_df,summary)
     update_readme(summary,products)
     print(json.dumps({'summary':summary,'qa':report},ensure_ascii=False,indent=2))
