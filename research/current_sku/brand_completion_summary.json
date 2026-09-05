@@ -12,24 +12,19 @@
     "kamotsuru_current_major_complete": true,
     "itteki_distinct_from_generic": true,
     "itteki_current_sizes": true,
-    "xlsx_brand_sheets": true
+    "flat_csv_outputs": true,
+    "no_root_xlsx": true
   },
-  "xlsx": [
+  "csv": [
     {
-      "file": "東広島市_西条エリア7蔵_主要日本酒一覧.xlsx",
-      "brand_sheets": true
+      "file": "東広島市_西条エリア7蔵_現行日本酒一覧.csv",
+      "rows": 134,
+      "flat_columns_ok": true
     },
     {
-      "file": "東広島市_西条エリア7蔵_現行日本酒一覧.xlsx",
-      "brand_sheets": true
-    },
-    {
-      "file": "東広島市_安芸津・黒瀬エリア3蔵_主要日本酒一覧.xlsx",
-      "brand_sheets": true
-    },
-    {
-      "file": "東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.xlsx",
-      "brand_sheets": true
+      "file": "東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.csv",
+      "rows": 37,
+      "flat_columns_ok": true
     }
   ],
   "passed": true
