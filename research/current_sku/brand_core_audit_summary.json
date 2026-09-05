@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-05",
+  "generated": "2026-09-06",
   "sku_rows": 382,
   "brand_families": 18,
-  "core_products": 67,
+  "core_products": 73,
   "A_required": 50,
   "A_covered": 50,
   "A_sku_confirmed": 46,
@@ -61,7 +61,7 @@
       "A_required": 5,
       "A_covered": 5,
       "A_sku_confirmed": 5,
-      "B_major": 2
+      "B_major": 8
     },
     "金光酒造": {
       "A_required": 5,

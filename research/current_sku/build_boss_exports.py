@@ -82,6 +82,18 @@ SUPPLEMENTAL_METER = {
     ("金光酒造","賀茂金秀 辛口特別純米"): "+8",
 }
 
+# WEB商品層に未収録でも、公式ECで現在販売中の主要商品は商品一覧へ補完する。
+# 網羅目的で全SKUを昇格させず、代表性が高く独立商品として扱うべきものだけを明示管理する。
+CURRENT_SKU_PRODUCT_SPECS = [
+    {"酒蔵":"賀茂鶴酒造","商品名":"純米吟醸 一滴入魂","match":"純米吟醸 一滴入魂","分類":"純米吟醸","流通区分":"一般流通","出典URL":"https://shop.kamotsuru.jp/SHOP/itteki720.html","include_soldout":True},
+    {"酒蔵":"賀茂鶴酒造","商品名":"賀茂鶴 光壽","match":"賀茂鶴光壽","分類":"その他","精米歩合":"28%","流通区分":"一般流通","出典URL":"https://shop.kamotsuru.jp/SHOP/kouju750.html"},
+    {"酒蔵":"賀茂鶴酒造","商品名":"純米大吟醸 瑞兆賀茂鶴","match":"純米大吟醸 瑞兆賀茂鶴","分類":"純米大吟醸","流通区分":"一般流通","出典URL":"https://shop.kamotsuru.jp/SHOP/zuicho720.html"},
+    {"酒蔵":"賀茂鶴酒造","商品名":"大吟醸 吉祥 賀茂鶴","match":"大吟醸 吉祥 賀茂鶴","分類":"大吟醸","流通区分":"一般流通","出典URL":"https://shop.kamotsuru.jp/SHOP/kissho720.html"},
+    {"酒蔵":"賀茂鶴酒造","商品名":"大吟醸 天凜","match":"大吟醸 天凜","分類":"大吟醸","流通区分":"一般流通","出典URL":"https://shop.kamotsuru.jp/SHOP/tenrin720.html"},
+    {"酒蔵":"賀茂鶴酒造","商品名":"大吟醸 吟凛雅","match":"大吟醸 吟凛雅","分類":"大吟醸","流通区分":"一般流通","出典URL":"https://shop.kamotsuru.jp/SHOP/ginringa900.html"},
+    {"酒蔵":"賀茂鶴酒造","商品名":"酒中在心 鶯 純米大吟醸 山田錦","match":"酒中在心 鶯 純米大吟醸 山田錦","分類":"純米大吟醸","流通区分":"限定流通","出典URL":"https://shop.kamotsuru.jp/SHOP/shutyuzaishin-uguisu_720.html"},
+]
+
 def clean(v):
     if pd.isna(v): return ""
     return " ".join(str(v).replace("　", " ").split())
@@ -153,6 +165,8 @@ def sku_matches(brewery: str, product_name: str):
         sn = norm_name(clean(r["商品名"]))
         if not pn or not sn: continue
         ratio = SequenceMatcher(None, pn, sn).ratio()
+        if brewery == "賀茂鶴酒造" and pn == norm_name("純米吟醸") and "一滴入魂" in clean(r["商品名"]):
+            continue
         contain = (len(pn) >= 4 and (pn in sn or sn in pn))
         if contain: ratio=max(ratio,0.95)
         if contain or ratio >= 0.76:
@@ -182,6 +196,39 @@ def aggregate_sku(brewery: str, product_name: str):
         lo, hi = min(prices), max(prices)
         price_txt = f"{lo:,}円" if lo == hi else f"{lo:,}～{hi:,}円"
     return cap_txt, price_txt, " / ".join(channels)
+
+def current_sku_product_row(spec):
+    all_hits = SKU[SKU["酒蔵"] == spec["酒蔵"]].copy()
+    all_hits = all_hits[all_hits["商品名"].fillna("").str.contains(spec["match"], regex=False)]
+    all_hits = all_hits[all_hits["出典種別"].fillna("").str.startswith("official")]
+    selling = all_hits[all_hits["販売状態"] == "販売中"]
+    if selling.empty:
+        return None
+    hits = selling.copy()
+    if spec.get("include_soldout"):
+        soldout = all_hits[all_hits["在庫状態"] == "売切"]
+        hits = pd.concat([hits, soldout], ignore_index=True).drop_duplicates(subset=["URL", "容量ml", "商品名"])
+    caps=[]; prices=[]
+    for _, sr in hits.iterrows():
+        try:
+            v=float(sr.get("容量ml"));
+            if 100 <= v <= 5000: caps.append(int(v))
+        except Exception: pass
+        try:
+            p=float(sr.get("価格円税込"));
+            if p > 0: prices.append(int(p))
+        except Exception: pass
+    cap_txt=" / ".join(f"{x:,}ml" for x in sorted(set(caps)))
+    price_txt=""
+    if prices:
+        lo,hi=min(prices),max(prices); price_txt=f"{lo:,}円" if lo==hi else f"{lo:,}～{hi:,}円"
+    return {"酒蔵":spec["酒蔵"],"商品名":spec["商品名"],"分類":spec["分類"],"甘辛目安":"不明",
+            "甘辛判定根拠":"公開情報で判定材料不足","日本酒度":"","精米歩合":spec.get("精米歩合",""),
+            "アルコール度数":"","おすすめの飲み方":"要確認","飲み方情報":"公開情報で要確認",
+            "飲み方出典URL":"","使用米":"","容量":cap_txt,"参考価格":price_txt,"流通区分":spec["流通区分"],
+            "備考":"公式直営ECで販売中を確認。SKU層から商品層へ補完。","出典URL":spec["出典URL"],
+            "出典数":int(hits["URL"].nunique())}
+
 def build_products(breweries):
     rows, audit = [], []
     current = WEB[(WEB["酒蔵"].isin(breweries)) & (WEB["販売状態"] == "販売中")].copy()
@@ -240,6 +287,14 @@ def build_products(breweries):
             "出典数": int(r.get("出典数") or 0),
         }
         rows.append(row)
+    existing={(r["酒蔵"], r["商品名"]) for r in rows}
+    for spec in CURRENT_SKU_PRODUCT_SPECS:
+        if spec["酒蔵"] not in breweries or (spec["酒蔵"], spec["商品名"]) in existing:
+            continue
+        row=current_sku_product_row(spec)
+        if row is not None:
+            rows.append(row); existing.add((spec["酒蔵"],spec["商品名"]))
+            audit.append([spec["酒蔵"], spec["match"], "SKU補完", "公式ECで販売中の主要独立商品を商品層へ補完", spec["商品名"]])
     df = pd.DataFrame(rows)
     if "亀齢酒造" in breweries and (df.empty or not ((df["酒蔵"]=="亀齢酒造") & (df["商品名"]=="亀齢 上撰")).any()):
         kirei_j={"酒蔵":"亀齢酒造","商品名":"亀齢 上撰","分類":"本醸造","甘辛目安":"辛口","甘辛判定根拠":"現行販売店の商品説明","日本酒度":"","精米歩合":"","アルコール度数":"","おすすめの飲み方":"冷酒 / 燗酒","飲み方情報":"現行販売店の商品説明","飲み方出典URL":"https://osake-style.com/SHOP/11012948.html","使用米":"","容量":"1,800ml","参考価格":"2,398円","流通区分":"一般流通","備考":"現行酒販店で在庫ありを確認","出典URL":"https://osake-style.com/SHOP/11012948.html","出典数":2}
