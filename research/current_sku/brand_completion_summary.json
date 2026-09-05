@@ -2,8 +2,8 @@
   "generated": "2026-09-06",
   "checks": {
     "A_complete": true,
-    "A_50_of_50": true,
-    "main_5_each": true,
+    "A_expected_complete": true,
+    "main_expected_each": true,
     "brand_blank_zero": true,
     "product_duplicates_zero": true,
     "sanyotsuru_honto": true,
@@ -18,12 +18,12 @@
   "csv": [
     {
       "file": "東広島市_西条エリア7蔵_現行日本酒一覧.csv",
-      "rows": 134,
+      "rows": 159,
       "flat_columns_ok": true
     },
     {
       "file": "東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.csv",
-      "rows": 37,
+      "rows": 45,
       "flat_columns_ok": true
     }
   ],

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import json, re
+import json, re, unicodedata
 from difflib import SequenceMatcher
 import pandas as pd
 
@@ -20,7 +20,6 @@ with (WEB_DIR / "sources.jsonl").open(encoding="utf-8") as f:
 EXCLUDE_TOKENS = [
     "酒まつり", "記念酒", "記念 ", "見学室直売所", "鑑評会出品酒", "オリジナルラベル",
     "飲み比べ", "セット", "アソート", "菰樽", "角樽", "JAL搭載限定ラベル",
-    "蔵元限定", "酒蔵限定", "蔵内限定", "吉田屋の酒",
 ]
 SEASONAL_TOKENS = ["しぼりたて", "ひやおろし", "秋上がり", "夏", "春", "新酒", "生酒", "うすにごり", "おりがらみ"]
 LIMITED_TOKENS = ["流通限定", "取扱い店限定", "アメリカ限定", "海外限定", "輸出限定"]
@@ -179,7 +178,7 @@ def aggregate_sku(brewery: str, product_name: str):
             if pd.notna(v) and 100 <= float(v) <= 5000: caps.append(int(float(v)))
         except Exception: pass
         p = r.get("価格円税込")
-        sku_name=clean(r.get("商品名"))
+        sku_name=unicodedata.normalize("NFKC",clean(r.get("商品名")))
         is_multi=bool(re.search(r"(?:[2-9]|1[0-9]|2[0-9]|30)本|セット|アソート|ワイングラス",sku_name))
         try:
             if pd.notna(p) and float(p) > 0 and not is_multi: prices.append(int(float(p)))

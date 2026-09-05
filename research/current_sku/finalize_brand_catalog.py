@@ -6,6 +6,7 @@ from difflib import SequenceMatcher
 import pandas as pd
 import requests
 import build_boss_exports as old
+import content_facts_20260906 as facts
 
 ROOT=Path(r'C:\Users\tarou\Downloads\sake-saijo-db')
 DIR=ROOT/'research'/'current_sku'; WEB_DIR=ROOT/'research'/'web'
@@ -179,7 +180,7 @@ def patch_products():
         df.to_csv(p,index=False,encoding='utf-8-sig'); outputs[area]=df
     bs=json.loads((DIR/'boss_export_summary.json').read_text(encoding='utf-8'))
     for area,df in outputs.items():
-        bs[area]['products']=len(df); bs[area]['main']=len(AREAS[area])*5
+        bs[area]['products']=len(df); bs[area]['main']=sum(6 if b=='金光酒造' else 5 for b in AREAS[area])
         bs[area]['by_brewery']=df['酒蔵'].value_counts().reindex(AREAS[area],fill_value=0).to_dict()
     (DIR/'boss_export_summary.json').write_text(json.dumps(bs,ensure_ascii=False,indent=2),encoding='utf-8')
     return outputs
@@ -272,8 +273,9 @@ def write_flat_csvs(products,main):
                             'おすすめの飲み方':c['おすすめの飲み方'],'容量':c['容量'],'流通区分':c['流通区分'],
                             '備考':'主要銘柄管理から統合。現行根拠は内部監査表を参照。','出典URL':c['出典URL']})
                 source=pd.concat([source,pd.DataFrame([row])],ignore_index=True)
-            if int(((source['酒蔵']==brewery) & (source['主要銘柄']=='○')).sum()) != 5:
-                raise RuntimeError(f"主要銘柄数が5件ではありません: {brewery}")
+            expected=6 if brewery=='金光酒造' else 5
+            if int(((source['酒蔵']==brewery) & (source['主要銘柄']=='○')).sum()) != expected:
+                raise RuntimeError(f"主要銘柄数が期待値ではありません: {brewery} expected={expected}")
         order={b:i for i,b in enumerate(breweries)}
         source['_brew_order']=source['酒蔵'].map(order)
         source['_main_order']=(source['主要銘柄']!='○').astype(int)
@@ -299,7 +301,7 @@ def write_summary(bm,registry,sku,main):
     summary={'generated':TODAY,'sku_rows':len(sku),'brand_families':len(registry),'core_products':len(bm),
              'A_required':len(a),'A_covered':int((a['ブランド収録判定']=='収録済').sum()),
              'A_sku_confirmed':int((a['個別SKU確認']=='SKU確認済').sum()),
-             'A_complete':bool(len(a)==50 and (a['ブランド収録判定']=='収録済').all()),'main_products':len(main),'by_brewery':by}
+             'A_complete':bool(len(a)==51 and (a['ブランド収録判定']=='収録済').all()),'main_products':len(main),'by_brewery':by}
     (DIR/'brand_core_audit_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
     return summary
 
@@ -307,8 +309,8 @@ def qa(products,bm,registry,main,summary):
     allp=pd.concat(products.values(),ignore_index=True).fillna('')
     checks={
       'A_complete':summary['A_complete'],
-      'A_50_of_50':summary['A_required']==50 and summary['A_covered']==50,
-      'main_5_each':all(x==5 for x in main.groupby('酒蔵').size().to_dict().values()) and main['酒蔵'].nunique()==10,
+      'A_expected_complete':summary['A_required']==51 and summary['A_covered']==51,
+      'main_expected_each':all(main.groupby('酒蔵').size().to_dict().get(b,0)==(6 if b=='金光酒造' else 5) for bs in AREAS.values() for b in bs) and main['酒蔵'].nunique()==10,
       'brand_blank_zero':int((allp['ブランド'].str.strip()=='').sum())==0,
       'product_duplicates_zero':int(allp.duplicated(['酒蔵','商品名']).sum())==0,
       'sanyotsuru_honto':bool(((allp['酒蔵']=='山陽鶴酒造') & allp['商品名'].str.contains('ほんと',regex=False)).any()),
@@ -328,7 +330,7 @@ def qa(products,bm,registry,main,summary):
         if ok:
             c=pd.read_csv(p,encoding='utf-8-sig').fillna('')
             cols=list(c.columns); rows=len(c)
-            main_ok=(c[c['主要銘柄']=='○'].groupby('酒蔵').size().reindex(AREAS[area],fill_value=0)==5).all()
+            counts=c[c['主要銘柄']=='○'].groupby('酒蔵').size().reindex(AREAS[area],fill_value=0); main_ok=all(int(counts[b])==(6 if b=='金光酒造' else 5) for b in AREAS[area])
             dup_ok=not c.duplicated(['酒蔵','商品名']).any()
             ok=all(x in cols for x in required_cols) and rows>=len(products[area]) and bool(main_ok) and bool(dup_ok)
         csv_outputs.append({'file':p.name,'rows':rows,'flat_columns_ok':ok})
@@ -356,7 +358,7 @@ def update_readme(summary,products):
 - `東広島市_西条エリア7蔵_現行日本酒一覧.csv` — 商品単位 {counts.get('西条エリア7蔵',0)}件
 - `東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.csv` — 商品単位 {counts.get('安芸津・黒瀬エリア3蔵',0)}件
 
-主要銘柄は別ファイル・別シートに分けず、`主要銘柄` 列に `○` を付けます。`○` で絞り込むと各蔵5銘柄、計50銘柄を確認できます。`ブランド`、`シリーズ`、`飲み方` も同じ商品行の列として保持します。
+主要銘柄は別ファイル・別シートに分けず、`主要銘柄` 列に `○` を付けます。`○` で絞り込むと金光酒造は6銘柄、その他9蔵は各5銘柄、計51銘柄を確認できます。`ブランド`、`シリーズ`、`飲み方` も同じ商品行の列として保持します。
 
 西条エリアは賀茂鶴・白牡丹・西條鶴・亀齢・福美人・賀茂泉・山陽鶴、安芸津・黒瀬エリアは今田酒造本店・柄酒造・金光酒造です。
 
@@ -366,7 +368,7 @@ def update_readme(summary,products):
 - **B**: 主要定番、高級ライン、別ブランド、注目シリーズ
 - **C**: その他の現行商品・季節商品・限定商品
 
-2026-09-06時点で、Aランクは **{summary['A_covered']}/{summary['A_required']}件収録済み**です。Aは各蔵5件、計50件を必須チェックにしています。
+2026-09-06時点で、Aランクは **{summary['A_covered']}/{summary['A_required']}件収録済み**です。Aは金光酒造6件、その他9蔵5件、計51件を必須チェックにしています。
 個別販売SKUまで公開確認できたA銘柄は {summary['A_sku_confirmed']}件です。SKU未確認は「銘柄欠落」ではなく、蔵元が代表酒として公開している一方で容量・JAN等の個別販売情報が公開されていないケースとして区別します。
 
 ## データ構造とルール
@@ -378,7 +380,7 @@ def update_readme(summary,products):
 - `research/current_sku/evidence/`: 現行SKU・ブランド確認の保存証拠
 - `sources/`: 外部オープンデータ等の原本
 
-販売状態は `販売中 / 休売 / 終売 / 不明` の4値です。容量・箱・容器だけが違う場合は上司向け商品表では統合し、生酒・にごり・熟成等で酒質が変わる場合は別商品として扱います。ギフトセット、記念酒、酒まつり限定、OEM/PB等は一般流通の本表から原則除外し、監査表に理由を残します。
+販売状態は `販売中 / 休売 / 終売 / 不明` の4値です。容量・箱・容器だけが違う場合は上司向け商品表では統合し、生酒・にごり・熟成等で酒質が変わる場合は別商品として扱います。季節・数量・蔵元・流通・輸出限定の商品も2026-09-06時点で現行性を確認できれば収録します。ギフトセットや包装違いだけのSKU、コラボ商品は本表から除外し、監査情報で区別します。
 
 甘辛・飲用温度は蔵元等の明示情報を優先します。根拠がないものは推測で埋めず `不明` / `要確認` とします。日本酒度から甘辛を分類した場合は「目安」と明記します。
 
@@ -399,7 +401,7 @@ python research/current_sku/finalize_brand_catalog.py
     (ROOT/'README.md').write_bytes(text.encode('utf-8-sig'))
 
 def main():
-    sku=patch_sku_master(); update_sku_summary(sku); products=patch_products()
+    sku=patch_sku_master(); update_sku_summary(sku); products=patch_products(); products=facts.apply(products)
     bm=make_brand_master(products,sku); registry=make_registry(bm); main_df=make_main_core(bm,products,sku)
     root_files=write_flat_csvs(products,main_df)
     summary=write_summary(bm,registry,sku,main_df); report=qa(products,bm,registry,main_df,summary)

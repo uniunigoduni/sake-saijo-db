@@ -1,34 +1,34 @@
 {
   "西条エリア7蔵": {
-    "products": 133,
+    "products": 158,
     "main": 35,
-    "audit": 312,
+    "audit": 304,
     "product_file": "boss_西条エリア7蔵_products.csv",
     "audit_file": "boss_西条エリア7蔵_audit.csv",
     "by_brewery": {
-      "賀茂鶴酒造": 25,
-      "白牡丹酒造": 42,
-      "西條鶴醸造": 13,
-      "亀齢酒造": 13,
-      "福美人酒造": 11,
-      "賀茂泉酒造": 23,
-      "山陽鶴酒造": 6
+      "賀茂鶴酒造": 41,
+      "白牡丹酒造": 41,
+      "賀茂泉酒造": 25,
+      "西條鶴醸造": 18,
+      "亀齢酒造": 14,
+      "福美人酒造": 12,
+      "山陽鶴酒造": 7
     },
     "root_file": "東広島市_西条エリア7蔵_現行日本酒一覧.csv",
-    "root_products": 134
+    "root_products": 159
   },
   "安芸津・黒瀬エリア3蔵": {
-    "products": 37,
-    "main": 15,
+    "products": 45,
+    "main": 16,
     "audit": 100,
     "product_file": "boss_安芸津・黒瀬エリア3蔵_products.csv",
     "audit_file": "boss_安芸津・黒瀬エリア3蔵_audit.csv",
     "by_brewery": {
       "今田酒造本店": 19,
-      "柄酒造": 12,
-      "金光酒造": 6
+      "金光酒造": 14,
+      "柄酒造": 12
     },
     "root_file": "東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.csv",
-    "root_products": 37
+    "root_products": 45
   }
 }
