@@ -1,0 +1,33 @@
+{
+  "generated": "2026-09-05",
+  "checks": {
+    "A_complete": true,
+    "A_50_of_50": true,
+    "main_5_each": true,
+    "brand_blank_zero": true,
+    "product_duplicates_zero": true,
+    "sanyotsuru_honto": true,
+    "hakubotan_daiginjo_sizes": true,
+    "no_cokun_plus": true,
+    "xlsx_brand_sheets": true
+  },
+  "xlsx": [
+    {
+      "file": "東広島市_西条エリア7蔵_主要日本酒一覧.xlsx",
+      "brand_sheets": true
+    },
+    {
+      "file": "東広島市_西条エリア7蔵_現行日本酒一覧.xlsx",
+      "brand_sheets": true
+    },
+    {
+      "file": "東広島市_安芸津・黒瀬エリア3蔵_主要日本酒一覧.xlsx",
+      "brand_sheets": true
+    },
+    {
+      "file": "東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.xlsx",
+      "brand_sheets": true
+    }
+  ],
+  "passed": true
+}

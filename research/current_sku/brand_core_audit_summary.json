@@ -1,0 +1,73 @@
+{
+  "generated": "2026-09-05",
+  "sku_rows": 382,
+  "brand_families": 18,
+  "core_products": 67,
+  "A_required": 50,
+  "A_covered": 50,
+  "A_sku_confirmed": 46,
+  "A_complete": true,
+  "main_products": 50,
+  "by_brewery": {
+    "亀齢酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 4,
+      "B_major": 2
+    },
+    "今田酒造本店": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 2
+    },
+    "山陽鶴酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 2,
+      "B_major": 0
+    },
+    "柄酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 2
+    },
+    "白牡丹酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 2
+    },
+    "福美人酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 1
+    },
+    "西條鶴醸造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 1
+    },
+    "賀茂泉酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 3
+    },
+    "賀茂鶴酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 2
+    },
+    "金光酒造": {
+      "A_required": 5,
+      "A_covered": 5,
+      "A_sku_confirmed": 5,
+      "B_major": 2
+    }
+  }
+}
