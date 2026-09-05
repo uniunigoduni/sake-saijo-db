@@ -1,0 +1,22 @@
+{
+  "clues": 138,
+  "matches": 46,
+  "candidate_or_unmatched": 70,
+  "by_source": {
+    "jsake": 29,
+    "sake_dataset": 10,
+    "sake_suggest": 66,
+    "sakenowa": 24,
+    "sakeopendata": 9
+  },
+  "unmatched_by_brewery": {
+    "亀齢酒造": 9,
+    "今田酒造本店": 13,
+    "山陽鶴酒造": 2,
+    "白牡丹酒造": 4,
+    "西條鶴醸造": 10,
+    "賀茂泉酒造": 11,
+    "賀茂鶴酒造": 12,
+    "金光酒造": 9
+  }
+}

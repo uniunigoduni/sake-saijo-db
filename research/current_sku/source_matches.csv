@@ -1,0 +1,139 @@
+﻿source,酒蔵,候補名,日本酒度,飲用温度,精米歩合,ALC,補足,source_ref,照合状態,照合先,類似度
+sake_dataset,賀茂泉酒造,賀茂泉 造賀 純米生詰 ひやおろし,0.00,,65,15.00,純米,sake_dataset_v1.json,一致,造賀純米酒 ひやおろし,0.857
+sake_dataset,賀茂泉酒造,賀茂泉 山吹色の酒,1.00,,60,15.00,純米吟醸,sake_dataset_v1.json,一致,山吹色の酒,1.0
+sake_dataset,賀茂泉酒造,賀茂泉 朱泉 本仕込,1.00,,58,16.00,純米吟醸,sake_dataset_v1.json,一致,朱泉本仕込,1.0
+sake_dataset,賀茂泉酒造,賀茂泉 緑泉 本仕込,1.00,,60,15.00,純米吟醸,sake_dataset_v1.json,一致,緑泉本仕込,1.0
+sake_dataset,賀茂泉酒造,賀茂泉 造賀,0.00,,65,15.00,純米,sake_dataset_v1.json,候補,造賀純米酒,0.571
+sake_dataset,賀茂泉酒造,賀茂泉 ＣＯＫＵＮ,-60.00,,70,8.00,純米,sake_dataset_v1.json,未一致,,0.0
+sake_dataset,賀茂泉酒造,賀茂泉 ＣＯＫＵＮ ＋,-60.00,,70,8.00,リキュール,sake_dataset_v1.json,未一致,,0.0
+sake_dataset,賀茂泉酒造,賀茂泉 純米吟醸 搾りたて生酒,-1.50,,58,15.00,純米吟醸,sake_dataset_v1.json,候補,青泉純米吟醸生酒,0.667
+sake_dataset,賀茂泉酒造,賀茂泉 青泉 純米吟醸生酒,0.00,,58,15.00,純米吟醸,sake_dataset_v1.json,一致,青泉純米吟醸生酒,1.0
+sake_dataset,賀茂泉酒造,賀茂泉 造賀 純米生酒,0.00,,65,15.00,純米,sake_dataset_v1.json,一致,造賀純米生酒,1.0
+sake_suggest,賀茂泉酒造,賀茂泉 COKUN,,5-10℃,65,8,低アル純米,sake_suggest_ui_api_page_012.json,一致,COKUN,1.0
+sake_suggest,亀齢酒造,亀齢萬年 純米吟醸 原酒 五拾,4,5-20℃,50,17,純米吟醸原酒,sake_suggest_ui_api_page_072.json,一致,亀齢萬年 純米大吟醸原酒五拾 生酒,0.87
+sake_suggest,亀齢酒造,亀齢萬年 特別純米 原酒 生酒,5,5-15℃,60,17,特別純米生原酒,sake_suggest_ui_api_page_072.json,候補,亀齢萬年 純米大吟醸原酒五拾 生酒,0.696
+sake_suggest,亀齢酒造,亀齢萬年 純米吟醸 無濾過生原酒,4,5-15℃,50,17,純吟生原酒,sake_suggest_ui_api_page_073.json,候補,亀齢萬年 純米大吟醸原酒五拾 生酒,0.64
+sake_suggest,亀齢酒造,亀齢萬年 純米大吟醸 原酒 純米酒 辛口 大吟醸 純米大吟醸,5,8-12℃,40,17,純米大吟醸原酒,sake_suggest_ui_api_page_074.json,候補,亀齢萬年 純米大吟醸原酒五拾 生酒,0.571
+sake_suggest,金光酒造,賀茂金秀 桜吹雪 純米大吟醸,2,8-15℃,40,16,純米大吟醸,sake_suggest_ui_api_page_084.json,一致,賀茂金秀 純米大吟醸35,0.783
+sake_suggest,金光酒造,賀茂金秀 桜吹雪 特別純米 うすにごり生,2,5-12℃,60,16,特別純米生,sake_suggest_ui_api_page_085.json,候補,賀茂金秀 特別純米,0.64
+sake_suggest,金光酒造,桜吹雪 Sakurafubuki 純米大吟醸50 火入れ,2,8-15℃,50,16,純米大吟醸,sake_suggest_ui_api_page_085.json,未一致,賀茂金秀 純米大吟醸35,0.333
+sake_suggest,金光酒造,桜吹雪 大吟醸,4,5-15℃,40,16,大吟醸,sake_suggest_ui_api_page_085.json,未一致,賀茂金秀 純米大吟醸35,0.353
+sake_suggest,金光酒造,桜吹雪 穏やか純米吟醸,3,10-25℃,55,15,純米吟醸,sake_suggest_ui_api_page_085.json,未一致,賀茂金秀 純米吟醸 雄町,0.4
+sake_suggest,白牡丹酒造,白牡丹 大吟醸,4,8-12℃,40,16,大吟醸,sake_suggest_ui_api_page_099.json,一致,大吟醸,1.0
+sake_suggest,白牡丹酒造,白牡丹 上撰 金紋,2,15-55℃,,15,普通酒,sake_suggest_ui_api_page_100.json,一致,広島上撰 金紋,0.92
+sake_suggest,白牡丹酒造,白牡丹 純米吟醸,1,10-25℃,55,15,純米吟醸,sake_suggest_ui_api_page_100.json,一致,純米吟醸,1.0
+sake_suggest,白牡丹酒造,白牡丹 純米酒,3,15-50℃,65,15,純米酒,sake_suggest_ui_api_page_100.json,一致,純米酒,1.0
+sake_suggest,白牡丹酒造,白牡丹 純米大吟醸 悠星,2,8-15℃,50,15,純米大吟醸,sake_suggest_ui_api_page_100.json,一致,純米大吟醸 悠星(ゆうせい),1.0
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） 純米吟醸「山吹色の酒」,2,15-55℃,58,15,純米吟醸,sake_suggest_ui_api_page_113.json,一致,山吹色の酒,0.92
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） 搾りたて生原酒,2,5-15℃,65,17,純米生原,sake_suggest_ui_api_page_113.json,未一致,造賀純米生酒,0.211
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） 普通酒 緑泉,3,15-55℃,70,15,普通酒,sake_suggest_ui_api_page_113.json,未一致,朱泉普通酒,0.375
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） 純米大吟醸 延壽,1,8-15℃,45,16,純米大吟醸,sake_suggest_ui_api_page_113.json,一致,純米大吟醸,0.92
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） 純米吟醸 しぼりたて生酒,1,5-15℃,58,16,純吟生酒,sake_suggest_ui_api_page_113.json,未一致,青泉純米吟醸生酒,0.48
+sake_suggest,賀茂泉酒造,賀茂泉 かもいずみ 普通酒 朱泉,4,15-55℃,70,15,普通酒,sake_suggest_ui_api_page_113.json,未一致,朱泉普通酒,0.4
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） COKUN (こくんぷらす）純米酒,3,10-50℃,65,15,純米酒,sake_suggest_ui_api_page_113.json,一致,COKUN,0.92
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） 純米酒 一,3,15-50℃,65,15,純米酒,sake_suggest_ui_api_page_113.json,一致,純米酒 一 (はじめ),0.92
+sake_suggest,賀茂泉酒造,賀茂泉かもいずみ） 純米吟醸 本仕込み 朱泉,1,10-25℃,58,15,純米吟醸,sake_suggest_ui_api_page_113.json,未一致,純米大吟醸,0.381
+sake_suggest,今田酒造本店,富久長（ふくちょう） 美穂 純米吟醸酒,2,10-15℃,50,16,純米吟醸,sake_suggest_ui_api_page_125.json,候補,八反草 純米吟醸,0.571
+sake_suggest,金光酒造,賀茂金秀 (かもきんしゅう) 純米吟醸 愛山,1,10-15℃,50,16,純米吟醸,sake_suggest_ui_api_page_126.json,一致,賀茂金秀 純米吟醸 雄町,0.8
+sake_suggest,西條鶴醸造,神髄・西條鶴（さいじょうつる）,1,10-15℃,35,16,純米大吟醸,sake_suggest_ui_api_page_128.json,未一致,吟醸酒「ゴールド西條鶴」,0.4
+sake_suggest,今田酒造本店,富久長（ふくちょう） 純米吟醸 山田錦,2,10-20℃,50,16,純米吟醸,sake_suggest_ui_api_page_132.json,候補,八反草 純米吟醸,0.571
+sake_suggest,金光酒造,賀茂金秀(かもきんしゅう) 純米吟醸 雄町,2,10-20℃,50,16,純米吟醸,sake_suggest_ui_api_page_132.json,一致,賀茂金秀 純米吟醸 雄町,1.0
+sake_suggest,今田酒造本店,富久長（ふくちょう） 純米吟醸八反草,1,10-20℃,50,16,純米吟醸,sake_suggest_ui_api_page_135.json,候補,八反草 純米吟醸,0.571
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 愛山 純米,1,10-40℃,65,16,純米酒,sake_suggest_ui_api_page_142.json,未一致,純米生原酒,0.444
+sake_suggest,金光酒造,賀茂金秀 (かもきんしゅう) 特別純米 辛口,9,10-45℃,50,16,特別純米,sake_suggest_ui_api_page_144.json,一致,賀茂金秀 特別純米,0.92
+sake_suggest,今田酒造本店,富久長（ふくちょう） 辛口 純米 火入れ,7,10-50℃,60,15,純米酒,sake_suggest_ui_api_page_149.json,一致,辛口純米,0.92
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 無濾過純米酒,4,15-45℃,65,16,純米酒,sake_suggest_ui_api_page_153.json,未一致,純米生原酒,0.545
+sake_suggest,今田酒造本店,富久長（ふくちょう） 八反草 純米 軟水仕込 辛口,6,15-45℃,60,15,純米酒,sake_suggest_ui_api_page_156.json,一致,八反草 純米 軟水仕込 辛口,1.0
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 上撰 富士,2,15-50℃,70,15,普通酒,sake_suggest_ui_api_page_156.json,未一致,,0.0
+sake_suggest,今田酒造本店,富久長 (ふくちょう) 新橋の男達（おやじ）の酒 火入,5,15-50℃,60,15,純米酒,sake_suggest_ui_api_page_158.json,未一致,,0.0
+sake_suggest,今田酒造本店,富久長（ふくちょう）八反草お燗で一杯,4,45-55℃,60,15,純米酒,sake_suggest_ui_api_page_164.json,未一致,八反草 純米吟醸,0.4
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 純米生原酒,3,5-10℃,65,17,純米生原酒,sake_suggest_ui_api_page_166.json,一致,純米生原酒,1.0
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 純米 直汲み 本生原酒,2,5-10℃,65,17,純米生原酒,sake_suggest_ui_api_page_167.json,候補,純米生原酒,0.714
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 純米大吟醸 日々精進酒醸 おりがらみ 生酒,-1,5-10℃,65,16,純米生,sake_suggest_ui_api_page_168.json,未一致,純米大吟醸原酒「神髄」,0.444
+sake_suggest,金光酒造,賀茂金秀 (かもきんしゅう) 純米 しぼりたて 生,2,5-10℃,60,16,純米生酒,sake_suggest_ui_api_page_171.json,候補,賀茂金秀 特別純米,0.6
+sake_suggest,金光酒造,賀茂金秀(かもきんしゅう) 特別純米 13,2,5-10℃,50,13,特別純米,sake_suggest_ui_api_page_172.json,一致,賀茂金秀 特別純米13,1.0
+sake_suggest,今田酒造本店,富久長(ふくちょう) 純米 海風土 シーフード,-10,5-10℃,70,13,純米酒,sake_suggest_ui_api_page_175.json,未一致,辛口純米,0.286
+sake_suggest,今田酒造本店,富久長（ふくちょう） 純米吟醸 山田錦 無濾過生原酒,2,5-10℃,50,17,純米吟醸,sake_suggest_ui_api_page_179.json,未一致,八反草 純米吟醸,0.4
+sake_suggest,今田酒造本店,富久長（ふくちょう） 純米吟醸 本生 直汲み 生酒 辛口,5,5-10℃,50,17,純米吟醸,sake_suggest_ui_api_page_179.json,未一致,八反草 純米吟醸,0.4
+sake_suggest,今田酒造本店,富久長（ふくちょう） 純米吟醸 八反草 無濾過原酒,1,5-12℃,50,17,純米吟醸,sake_suggest_ui_api_page_185.json,未一致,八反草 純米吟醸,0.421
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 広島流超辛口 山田錦 純米吟醸酒,10,5-40℃,50,16,純米吟醸,sake_suggest_ui_api_page_196.json,候補,広島流辛口吟醸 吟醸生酒,0.64
+sake_suggest,金光酒造,賀茂金秀(かもきんしゅう) 純米大吟醸 千本錦,2,8-12℃,40,16,純米大吟醸,sake_suggest_ui_api_page_206.json,一致,賀茂金秀 純米大吟醸35,0.783
+sake_suggest,金光酒造,賀茂金秀(かもきんしゅう) 純米大吟醸 農と醸の矜持 斗瓶採り,2,8-12℃,40,16,純米大吟醸,sake_suggest_ui_api_page_211.json,候補,賀茂金秀 純米大吟醸35,0.6
+sake_suggest,今田酒造本店,富久長（ふくちょう） 純米大吟醸 はしり 八反草 特別栽培米,2,8-12℃,40,16,純米大吟醸,sake_suggest_ui_api_page_211.json,候補,八反草 純米大吟醸 はしり,0.593
+sake_suggest,金光酒造,賀茂金秀(かもきんしゅう) 特別純米 原酒,3,8-15℃,50,16,特別純米原酒,sake_suggest_ui_api_page_212.json,一致,賀茂金秀 特別純米,0.92
+sake_suggest,西條鶴醸造,西條鶴（さいじょうつる） 純米大吟醸原酒『飛天空』,3,8-15℃,50,17,純米大吟醸,sake_suggest_ui_api_page_215.json,一致,純米大吟醸原酒「飛天空」,1.0
+sake_suggest,金光酒造,賀茂金秀(かもきんしゅう) 純米大吟醸 40,2,8-15℃,40,16,純米大吟醸,sake_suggest_ui_api_page_220.json,一致,賀茂金秀 純米大吟醸40,1.0
+sake_suggest,金光酒造,賀茂金秀(かもきんしゅう) SUITOH（すいとう）雄町,1,8-15℃,50,16,純米吟醸,sake_suggest_ui_api_page_222.json,未一致,賀茂金秀 純米吟醸 雄町,0.545
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 樽酒,3,常温,70,15,普通酒(樽酒),sake_suggest_ui_api_page_225.json,一致,樽酒,1.0
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 純米,2,常温・燗,60,15,純米酒,sake_suggest_ui_api_page_228.json,一致,純米酒,0.8
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 特等酒,3,常温・燗,70,15,特等酒(普通酒),sake_suggest_ui_api_page_228.json,未一致,本醸造 上等酒,0.444
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 上等酒,3,常温・燗,70,15,上等酒(普通酒),sake_suggest_ui_api_page_229.json,候補,本醸造 上等酒,0.667
+sake_suggest,賀茂鶴酒造,賀茂鶴 特製ゴールド,3,冷や,50,16,大吟醸,sake_suggest_ui_api_page_243.json,一致,大吟醸 特製ゴールド賀茂鶴,0.92
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 豊醇冷酒,2,冷や,60,15,純米吟醸,sake_suggest_ui_api_page_243.json,未一致,樽酒,0.333
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 純米大吟醸 広島錦,3,冷や,50,16,純米大吟醸,sake_suggest_ui_api_page_244.json,一致,純米大吟醸 広島錦,1.0
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 大吟醸 限定搾汁,3,冷や,50,16,大吟醸,sake_suggest_ui_api_page_244.json,未一致,大吟醸 賀茂鶴 双鶴,0.4
+sake_suggest,賀茂鶴酒造,大吟醸 賀茂鶴（かもつる） 双鶴,3,冷や,32,16,大吟醸,sake_suggest_ui_api_page_247.json,一致,大吟醸 賀茂鶴 双鶴,1.0
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 冷温 蔵生囲い 14度,2,冷や,60,14,純米吟醸(生詰),sake_suggest_ui_api_page_248.json,候補,生貯蔵酒 冷温「蔵生」囲い,0.632
+sake_suggest,賀茂鶴酒造,賀茂鶴（かもつる） 生囲い純米,2,冷や・常温,60,15,純米酒(生囲い),sake_suggest_ui_api_page_263.json,未一致,純米酒,0.5
+sakeopendata,賀茂鶴酒造,賀茂鶴,,15℃前後又は40℃前後,65,14～15,純米,https://www.sake-sennin.com/fbo/web/app.php/user/product/32,未一致,,0.0
+sakeopendata,賀茂泉酒造,賀茂泉 造賀酒,+0,15℃前後または35～45℃,65,15,純米,https://www.sake-sennin.com/fbo/web/app.php/user/product/246,一致,造賀純米酒,0.75
+sakeopendata,亀齢酒造,綺麗,,15℃前後又は40℃前後,,,純米吟醸,https://www.sake-sennin.com/fbo/web/app.php/user/product/350,未一致,,0.0
+sakeopendata,賀茂鶴酒造,賀茂鶴 大吟峰,,15度前後,,,純米大吟醸,https://www.sake-sennin.com/fbo/web/app.php/user/product/404,未一致,純米大吟醸 大吟峰,0.545
+sakeopendata,白牡丹酒造,白牡丹 広島八反,,10℃前後,,,吟醸,https://www.sake-sennin.com/fbo/web/app.php/user/product/431,一致,広島八反 純米吟醸,0.92
+sakeopendata,白牡丹酒造,白牡丹 千本錦,,10℃前後,,,吟醸,https://www.sake-sennin.com/fbo/web/app.php/user/product/430,未一致,本醸造,0.333
+sakeopendata,白牡丹酒造,白牡丹 山田錦,,12℃前後又は、40℃前後,,,純米,https://www.sake-sennin.com/fbo/web/app.php/user/product/459,候補,山田錦 純米酒,0.667
+sakeopendata,金光酒造,賀茂金秀,,18℃前後または40℃前後,,,特別純米,https://www.sake-sennin.com/fbo/web/app.php/user/product/610,一致,賀茂金秀 特別純米,0.92
+sakeopendata,今田酒造本店,富久長 ひやおろし 秋桜,,,50,15,吟醸,,未一致,秋櫻〈コスモス〉 純米 ひやおろし,0.5
+sakenowa,賀茂泉酒造,賀茂泉,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,賀茂鶴酒造,賀茂鶴,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,今田酒造本店,富久長,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,白牡丹酒造,白牡丹,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,金光酒造,賀茂金秀,,,,,ブランド候補,sakenowa_brands.json,一致,賀茂金秀 特別純米,0.92
+sakenowa,西條鶴醸造,西條鶴,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,福美人酒造,福美人,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,亀齢酒造,亀齢,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,金光酒造,神のいたずら,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,亀齢酒造,吉田屋,,,,,ブランド候補,sakenowa_brands.json,未一致,亀齢萬年 山田錦 生酒,0.2
+sakenowa,賀茂泉酒造,造賀,,,,,ブランド候補,sakenowa_brands.json,候補,造賀純米酒,0.571
+sakenowa,西條鶴醸造,米の精 雫,,,,,ブランド候補,sakenowa_brands.json,未一致,純米酒「大地の風」,0.364
+sakenowa,西條鶴醸造,神髄,,,,,ブランド候補,sakenowa_brands.json,未一致,純米大吟醸原酒「神髄」,0.364
+sakenowa,金光酒造,桜吹雪,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,賀茂鶴酒造,南洲翁,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,今田酒造本店,海風土,,,,,ブランド候補,sakenowa_brands.json,未一致,海風土 Seafood 純米,0.4
+sakenowa,今田酒造本店,美穂,,,,,ブランド候補,sakenowa_brands.json,未一致,純米吟醸 美穂 Biho,0.333
+sakenowa,亀齢酒造,亀齢萬年,,,,,ブランド候補,sakenowa_brands.json,未一致,亀齢萬年 山田錦 生酒,0.444
+sakenowa,山陽鶴酒造,山陽鶴,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,西條鶴醸造,蔵楽,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,今田酒造本店,温州みかん酒,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+sakenowa,賀茂泉酒造,NAO,,,,,ブランド候補,sakenowa_brands.json,一致,NAO,1.0
+sakenowa,白牡丹酒造,藝陽男山,,,,,ブランド候補,sakenowa_brands.json,未一致,山田錦 純米酒,0.2
+sakenowa,柄酒造,於多福,,,,,ブランド候補,sakenowa_brands.json,未一致,,0.0
+jsake,今田酒造本店,富久長 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-4c7f0380/,未一致,八反草 サタケシリーズ GENKEI,0.077
+jsake,白牡丹酒造,白牡丹 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-43cc1697/,未一致,広島の酒,0.286
+jsake,白牡丹酒造,白牡丹酒造 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-53f9011f/,未一致,純米酒 山田錦 米だけの酒,0.261
+jsake,賀茂泉酒造,賀茂泉 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-0ea9e488/,未一致,山吹色の酒,0.267
+jsake,賀茂泉酒造,賀茂泉酒造 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-8c5397c9/,未一致,純米酒 一 (はじめ),0.125
+jsake,金光酒造,賀茂金秀 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-cd141f5b/,未一致,賀茂金秀 特別純米,0.364
+jsake,賀茂鶴酒造,賀茂鶴 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-a97d376e/,未一致,本醸造 上等酒,0.25
+jsake,賀茂鶴酒造,賀茂鶴酒造 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-84eeafe9/,未一致,生貯蔵酒 冷温「蔵生」囲い,0.182
+jsake,亀齢酒造,亀齢 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-31a7cfe0/,未一致,亀齢萬年 山田錦おりがらみ 生酒,0.182
+jsake,亀齢酒造,亀齢酒造 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-1edd59f7/,未一致,亀齢萬年 純米大吟醸原酒五拾 袋吊りおりがらみ 生酒,0.182
+jsake,西條鶴醸造,西條鶴 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-7571a50d/,未一致,純米生原酒,0.133
+jsake,西條鶴醸造,西條鶴醸造 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-0b6443fe/,未一致,純米吟醸「大地の冠」,0.2
+jsake,山陽鶴酒造,山陽鶴酒造 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-6bc28226/,未一致,本醸造,0.111
+jsake,山陽鶴酒造,山陽鶴 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-4a184a87/,未一致,本醸造,0.125
+jsake,亀齢酒造,信州亀齢 のタグがついた日本酒,,,,,ページタイトル候補,https://jsake.jp/tag/tags-d91a7e3f/,未一致,亀齢萬年 山田錦おりがらみ 生酒,0.154
+jsake,今田酒造本店,富久長 純米吟醸 八反草の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/fukucho-junmai-ginjo/,未一致,八反草 純米吟醸,0.333
+jsake,白牡丹酒造,白牡丹 純米吟醸の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/hakubotan-junmai-ginjo/,一致,純米吟醸,0.92
+jsake,賀茂泉酒造,賀茂泉 純米吟醸 朱泉 本仕込の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamoizumi-junmai/,一致,朱泉本仕込,0.92
+jsake,金光酒造,賀茂金秀 純米吟醸の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamokin-shu/,候補,賀茂金秀 純米吟醸 雄町,0.571
+jsake,賀茂鶴酒造,賀茂鶴 純米大吟醸 広島錦の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamotsuru-hiroshima-nishiki/,一致,純米大吟醸 広島錦,0.92
+jsake,賀茂鶴酒造,賀茂鶴 本醸造 上等酒の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamotsuru-joutou/,一致,本醸造 上等酒,0.92
+jsake,賀茂鶴酒造,賀茂鶴 純米吟醸酒の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamotsuru-junmai-ginjo/,一致,純米吟醸,0.92
+jsake,賀茂鶴酒造,賀茂鶴 大吟醸 双鶴の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamotsuru-soukaku/,未一致,大吟醸 賀茂鶴 双鶴,0.435
+jsake,賀茂鶴酒造,賀茂鶴 特製ゴールド賀茂鶴 大吟醸の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamotsuru-tokusei-gold/,未一致,大吟醸 特製ゴールド賀茂鶴,0.529
+jsake,賀茂鶴酒造,賀茂鶴 特別本醸造 超特撰特等酒の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kamotsuru-tokutou/,一致,特別本醸造 超特撰特等酒,0.92
+jsake,亀齢酒造,亀齢 辛口純米 広島八反の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/kirei-hiroshima-junmai/,未一致,亀齢 辛口純米 八拾,0.417
+jsake,西條鶴醸造,西條鶴 純米吟醸 広島流超辛口の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/saijotsuru-junmai-ginjo/,未一致,純米吟醸「大地の冠」,0.357
+jsake,山陽鶴酒造,山陽鶴 恋のしずく 純米吟醸の評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/sanyotsuru-koinoshizuku/,一致,純米吟醸,0.92
+jsake,亀齢酒造,信州亀齢 純米吟醸 ひとごこちの評価・味わいレビュー,,,,,ページタイトル候補,https://jsake.jp/items/shinshukirei-junmai-ginjo/,未一致,亀齢 純米吟醸 六拾,0.276

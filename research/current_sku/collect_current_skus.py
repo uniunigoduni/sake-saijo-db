@@ -118,18 +118,31 @@ def crawl_colorme(brewery,base,max_pages=10,stype='official_ec'):
         except Exception as e: print('product error',brewery,url,repr(e))
     print('colorme',brewery,len(found))
 def crawl_shopserve_search(brewery,url,stype='official_ec'):
-    sid,body,_=fetch(brewery,url,'official_shop_catalog'); d=html.fromstring(body); found={}
-    for a in d.xpath('//a[@href]'):
-        href=urljoin(url,a.get('href') or ''); txt=compact(a.text_content())
-        if re.search(r'/SHOP/[^/]+\.html(?:\?|$)',href) and txt:
-            found[href]=(txt,nearest_text(a))
+    # ShopServeは商品一覧から多数のカテゴリに分岐するため、カテゴリ一覧を1階層たどって商品を全収集する。
+    sid,body,_=fetch(brewery,url,'official_shop_catalog'); root=html.fromstring(body)
+    catalogs={url}; found={}
+    for href in root.xpath('//a[@href]/@href'):
+        u=urljoin(url,href or '').strip()
+        if re.search(r'/SHOP/(?:\d+/)+list\.html(?:\?|$)',u): catalogs.add(u)
+    for cu in sorted(catalogs):
+        try:
+            csid,cbody,_=fetch(brewery,cu,'official_shop_catalog'); d=html.fromstring(cbody)
+        except Exception as e:
+            print('shopserve catalog error',brewery,cu,repr(e)); continue
+        for a in d.xpath('//a[@href]'):
+            href=urljoin(cu,a.get('href') or '').strip(); txt=compact(a.text_content()); card=nearest_text(a)
+            if re.search(r'/SHOP/[^/]+\.html(?:\?|$)',href) and not href.endswith('/list.html'):
+                leaf=href.split('?')[0].rstrip('/').split('/')[-1]
+                if leaf not in {'mailmag.html','basket.html','guide.html','faq.html','sitemap.html','member.html'}:
+                    found[href]=(txt,card)
     for pu,(fallback,card) in found.items():
         try:
-            psid,pbody,_=fetch(brewery,pu,'official_shop_product'); text=text_of(pbody); name=fallback
+            psid,pbody,_=fetch(brewery,pu,'official_shop_product'); text=text_of(pbody)
+            name=title_of(pbody,fallback) or fallback
             stock=stock_from(card+' '+text); status='不明' if stock=='売切' else '販売中'
             add_row(brewery,name,pu,psid,text,status,stock,price=price_yen(card) or price_yen(text),source_type=stype,note='公式EC掲載')
         except Exception as e: print('shopserve product error',brewery,pu,repr(e))
-    print('shopserve',brewery,len(found))
+    print('shopserve',brewery,'catalogs',len(catalogs),'products',len(found))
 
 def crawl_fukubijin():
     brewery='福美人酒造'; pages=[
@@ -140,10 +153,12 @@ def crawl_fukubijin():
         sid,body,_=fetch(brewery,u,'official_shop_catalog'); d=html.fromstring(body)
         for a in d.xpath('//a[@href]'):
             href=urljoin(u,a.get('href') or ''); txt=compact(a.text_content())
-            if re.search(r'/SHOP/[^/]+\.html(?:\?|$)',href) and txt: found[href]=(txt,nearest_text(a))
+            if re.search(r'/SHOP/[^/]+\.html(?:\?|$)',href): found[href]=(txt,nearest_text(a))
     for pu,(fallback,card) in found.items():
-        psid,pbody,_=fetch(brewery,pu,'official_shop_product'); text=text_of(pbody); name=fallback; stock=stock_from(card+' '+text)
-        add_row(brewery,name,pu,psid,text,'不明' if stock=='売切' else '販売中',stock,price=price_yen(card) or price_yen(text),source_type='official_ec',note='公式EC掲載')
+        try:
+            psid,pbody,_=fetch(brewery,pu,'official_shop_product'); text=text_of(pbody); name=ec_title_of(pbody,fallback) or fallback; stock=stock_from(card+' '+text)
+            add_row(brewery,name,pu,psid,text,'不明' if stock=='売切' else '販売中',stock,price=price_yen(card) or price_yen(text),source_type='official_ec',note='公式EC掲載')
+        except Exception as e: print('fukubijin product error',pu,repr(e))
     print('fukubijin',len(found))
 def crawl_shopify(brewery,base,product_type):
     api=base.rstrip('/')+'/products.json?limit=250'; sid,body,_=fetch(brewery,api,'official_shop_api')
@@ -189,7 +204,11 @@ def crawl_hakubotan_official_catalog():
     print('hakubotan official catalog',len(found))
 
 def crawl_retailer_category(brewery,url,name_tokens):
-    sid,body,_=fetch(brewery,url,'current_retailer_catalog'); d=html.fromstring(body); found={}
+    try:
+        sid,body,_=fetch(brewery,url,'current_retailer_catalog')
+    except Exception as e:
+        print('retailer catalog error',brewery,url,repr(e)); return
+    d=html.fromstring(body); found={}
     for a in d.xpath('//a[@href]'):
         href=urljoin(url,a.get('href') or ''); txt=compact(a.text_content())
         if '/product/' in href and txt and any(t in txt for t in name_tokens): found[href]=(txt,nearest_text(a,900))
