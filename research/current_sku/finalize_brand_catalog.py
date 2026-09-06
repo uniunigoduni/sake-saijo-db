@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 import csv, hashlib, json, re, unicodedata
@@ -7,6 +7,7 @@ import pandas as pd
 import requests
 import build_boss_exports as old
 import content_facts_20260906 as facts
+import history_serving_20260906 as hs
 
 ROOT=Path(r'C:\Users\tarou\Downloads\sake-saijo-db')
 DIR=ROOT/'research'/'current_sku'; WEB_DIR=ROOT/'research'/'web'
@@ -253,11 +254,11 @@ def make_main_core(bm,products,sku):
 
 def write_flat_csvs(products,main):
     root_files=[]
-    base_cols=['酒蔵','ブランド','シリーズ','商品名','分類','甘辛目安','日本酒度','精米歩合','アルコール度数',
-               'おすすめの飲み方','使用米','容量','参考価格','流通区分','備考','出典URL']
+    base_cols=['酒蔵','酒蔵の歴史','ブランド','銘柄の歴史','シリーズ','商品名','分類','甘辛目安','日本酒度','精米歩合','アルコール度数',
+               'おすすめの飲み方','おすすめの飲み方（文章）','使用米','容量','参考価格','流通区分','備考','出典URL']
     for area,breweries in AREAS.items():
         source=products[area][base_cols].copy()
-        source.insert(3,'主要銘柄','')
+        source.insert(5,'主要銘柄','')
         for brewery in breweries:
             used=set()
             cores=main[main['酒蔵']==brewery]
@@ -281,7 +282,7 @@ def write_flat_csvs(products,main):
         source['_main_order']=(source['主要銘柄']!='○').astype(int)
         source=source.sort_values(['_brew_order','_main_order','分類','商品名']).drop(columns=['_brew_order','_main_order']).reset_index(drop=True)
         out=ROOT/f'東広島市_{area}_現行日本酒一覧.csv'
-        df=source.rename(columns={'おすすめの飲み方':'飲み方'})
+        df=source.rename(columns={'おすすめの飲み方':'飲み方','おすすめの飲み方（文章）':'おすすめの飲み方'})
         df.to_csv(out,index=False,encoding='utf-8-sig')
         root_files.append({'area':area,'file':out.name,'rows':len(df),'main':int((df['主要銘柄']=='○').sum()),'columns':list(df.columns)})
     bs=json.loads((DIR/'boss_export_summary.json').read_text(encoding='utf-8'))
@@ -313,6 +314,9 @@ def qa(products,bm,registry,main,summary):
       'main_expected_each':all(main.groupby('酒蔵').size().to_dict().get(b,0)==(6 if b=='金光酒造' else 5) for bs in AREAS.values() for b in bs) and main['酒蔵'].nunique()==10,
       'brand_blank_zero':int((allp['ブランド'].str.strip()=='').sum())==0,
       'product_duplicates_zero':int(allp.duplicated(['酒蔵','商品名']).sum())==0,
+      'brewery_history_complete':int((allp['酒蔵の歴史'].str.strip()=='').sum())==0,
+      'brand_history_complete':int((allp['銘柄の歴史'].str.strip()=='').sum())==0,
+      'recommended_serving_complete':int((allp['おすすめの飲み方（文章）'].str.strip()=='').sum())==0,
       'sanyotsuru_honto':bool(((allp['酒蔵']=='山陽鶴酒造') & allp['商品名'].str.contains('ほんと',regex=False)).any()),
       'hakubotan_daiginjo_sizes':bool(((allp['酒蔵']=='白牡丹酒造') & (allp['商品名']=='大吟醸') & allp['容量'].str.contains('720ml',regex=False) & allp['容量'].str.contains('1,800ml',regex=False)).any()),
       'no_cokun_plus':not allp['商品名'].str.contains(r'COKUN\+',regex=True).any(),
@@ -322,7 +326,7 @@ def qa(products,bm,registry,main,summary):
       'itteki_current_sizes':bool(((allp['酒蔵']=='賀茂鶴酒造') & (allp['商品名']=='純米吟醸 一滴入魂') & allp['容量'].str.contains('300ml',regex=False) & allp['容量'].str.contains('720ml',regex=False) & allp['容量'].str.contains('1,800ml',regex=False)).any()),
     }
     csv_outputs=[]
-    required_cols=['酒蔵','ブランド','主要銘柄','商品名','分類','飲み方','出典URL']
+    required_cols=['酒蔵','酒蔵の歴史','ブランド','銘柄の歴史','主要銘柄','商品名','分類','飲み方','おすすめの飲み方','出典URL']
     for area in AREAS:
         p=ROOT/f'東広島市_{area}_現行日本酒一覧.csv'
         ok=p.exists()
@@ -332,7 +336,8 @@ def qa(products,bm,registry,main,summary):
             cols=list(c.columns); rows=len(c)
             counts=c[c['主要銘柄']=='○'].groupby('酒蔵').size().reindex(AREAS[area],fill_value=0); main_ok=all(int(counts[b])==(6 if b=='金光酒造' else 5) for b in AREAS[area])
             dup_ok=not c.duplicated(['酒蔵','商品名']).any()
-            ok=all(x in cols for x in required_cols) and rows>=len(products[area]) and bool(main_ok) and bool(dup_ok)
+            content_ok=all((c[x].astype(str).str.strip()!='').all() for x in ['酒蔵の歴史','銘柄の歴史','おすすめの飲み方'])
+            ok=all(x in cols for x in required_cols) and rows>=len(products[area]) and bool(main_ok) and bool(dup_ok) and bool(content_ok)
         csv_outputs.append({'file':p.name,'rows':rows,'flat_columns_ok':ok})
     checks['flat_csv_outputs']=all(x['flat_columns_ok'] for x in csv_outputs)
     checks['no_root_xlsx']=not any(ROOT.glob('東広島市_*日本酒一覧.xlsx'))
@@ -358,7 +363,7 @@ def update_readme(summary,products):
 - `東広島市_西条エリア7蔵_現行日本酒一覧.csv` — 商品単位 {counts.get('西条エリア7蔵',0)}件
 - `東広島市_安芸津・黒瀬エリア3蔵_現行日本酒一覧.csv` — 商品単位 {counts.get('安芸津・黒瀬エリア3蔵',0)}件
 
-主要銘柄は別ファイル・別シートに分けず、`主要銘柄` 列に `○` を付けます。`○` で絞り込むと金光酒造は6銘柄、その他9蔵は各5銘柄、計51銘柄を確認できます。`ブランド`、`シリーズ`、`飲み方` も同じ商品行の列として保持します。
+主要銘柄は別ファイル・別シートに分けず、`主要銘柄` 列に `○` を付けます。`○` で絞り込むと金光酒造は6銘柄、その他9蔵は各5銘柄、計51銘柄を確認できます。各商品行には `酒蔵の歴史`、`銘柄の歴史`、短い温度区分の `飲み方`、文章で説明する `おすすめの飲み方` も保持します。
 
 西条エリアは賀茂鶴・白牡丹・西條鶴・亀齢・福美人・賀茂泉・山陽鶴、安芸津・黒瀬エリアは今田酒造本店・柄酒造・金光酒造です。
 
@@ -378,11 +383,12 @@ def update_readme(summary,products):
 - `research/current_sku/sku_master.csv`: 販売SKU。容量・価格・JAN・販売チャネル等
 - `research/web/index.csv`: 商品単位の調査・酒質情報
 - `research/current_sku/evidence/`: 現行SKU・ブランド確認の保存証拠
+- `research/history_serving_20260906/`: 酒蔵史・銘柄史・飲み方の追加調査、出典一覧、商品別推薦根拠
 - `sources/`: 外部オープンデータ等の原本
 
 販売状態は `販売中 / 休売 / 終売 / 不明` の4値です。容量・箱・容器だけが違う場合は上司向け商品表では統合し、生酒・にごり・熟成等で酒質が変わる場合は別商品として扱います。季節・数量・蔵元・流通・輸出限定の商品も2026-09-06時点で現行性を確認できれば収録します。ギフトセットや包装違いだけのSKU、コラボ商品は本表から除外し、監査情報で区別します。
 
-甘辛・飲用温度は蔵元等の明示情報を優先します。根拠がないものは推測で埋めず `不明` / `要確認` とします。日本酒度から甘辛を分類した場合は「目安」と明記します。
+甘辛と短い `飲み方` は蔵元等の明示情報を優先し、根拠がない場合は `不明` / `要確認` を残します。一方、文章の `おすすめの飲み方` は全商品を必須入力とし、公式情報、信頼できる二次情報、既知の酒質情報からの推論の順で作成します。推論した行は文章中と `research/history_serving_20260906/product_serving_recommendations.csv` の根拠区分で識別できます。酒蔵・銘柄の歴史も同researchディレクトリに出典を保存します。日本酒度から甘辛を分類した場合は「目安」と明記します。
 
 ## 山陽鶴の扱い
 
@@ -401,7 +407,7 @@ python research/current_sku/finalize_brand_catalog.py
     (ROOT/'README.md').write_bytes(text.encode('utf-8-sig'))
 
 def main():
-    sku=patch_sku_master(); update_sku_summary(sku); products=patch_products(); products=facts.apply(products)
+    sku=patch_sku_master(); update_sku_summary(sku); products=patch_products(); products=facts.apply(products); products=hs.apply(products)
     bm=make_brand_master(products,sku); registry=make_registry(bm); main_df=make_main_core(bm,products,sku)
     root_files=write_flat_csvs(products,main_df)
     summary=write_summary(bm,registry,sku,main_df); report=qa(products,bm,registry,main_df,summary)
