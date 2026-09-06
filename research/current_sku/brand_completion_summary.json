@@ -8,6 +8,8 @@
     "product_duplicates_zero": true,
     "brewery_history_complete": true,
     "brand_history_complete": true,
+    "product_history_fallback_zero": true,
+    "collaboration_products_zero": true,
     "recommended_serving_complete": true,
     "sanyotsuru_honto": true,
     "hakubotan_daiginjo_sizes": true,
@@ -21,7 +23,7 @@
   "csv": [
     {
       "file": "東広島市_西条エリア7蔵_現行日本酒一覧.csv",
-      "rows": 159,
+      "rows": 155,
       "flat_columns_ok": true
     },
     {

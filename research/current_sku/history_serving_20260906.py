@@ -5,6 +5,8 @@ RDIR=ROOT/'research'/'history_serving_20260906'
 BH=pd.read_csv(RDIR/'brewery_history.csv',encoding='utf-8-sig').fillna('')
 BR=pd.read_csv(RDIR/'brand_history.csv',encoding='utf-8-sig').fillna('')
 SCAN=pd.read_csv(RDIR/'official_serving_scan.csv',encoding='utf-8-sig').fillna('')
+PHFULL=pd.read_csv(RDIR/'product_history_full.csv',encoding='utf-8-sig').fillna('')
+PHM={(r['酒蔵'],r['商品名']):r for _,r in PHFULL.iterrows()}
 BHM=BH.set_index('酒蔵')['酒蔵の歴史'].to_dict()
 BRM={(r['酒蔵'],r['ブランド']):r['銘柄の歴史'] for _,r in BR.iterrows()}
 SCANM={(r['酒蔵'],r['ブランド'],r['商品名']):(r['serving_terms'],r['出典URL']) for _,r in SCAN.iterrows()}
@@ -110,15 +112,16 @@ def apply(products):
         histories=[]
         for _,r in df.iterrows():
             key=(r['酒蔵'],r['商品名'])
-            if key in PH:
-                histories.append(PH[key])
-            elif r['酒蔵']=='今田酒造本店' and '八反草' in r['商品名']:
-                histories.append('富久長は100年以上姿を消していた広島最古の在来酒米「八反草」を、ひと握りの種もみから増やし2001年より復活栽培した。'+('この純米吟醸はその八反草を伝統の吟醸造りで醸し、現在は富久長のフラッグシップとして国内外で支持されている。' if r['商品名']=='八反草 純米吟醸' else 'この商品は、復活した八反草の個性を異なる精米・酒母・季節設計で表現する一連の商品群に位置づけられる。'))
-            elif r['酒蔵']=='白牡丹酒造' and r['ブランド']=='藝陽男山':
-                histories.append(BRM.get((r['酒蔵'],r['ブランド']),'')+' 現行の夏仕込み系列は、2023年夏に白牡丹が初めて仕込んだ生酛純米酒の挑戦を継続・発展させた商品群である。')
+            h=PHM.get(key)
+            if h is not None and str(h.get('個別商品の歴史','')).strip():
+                brand=str(h.get('ブランド史','')).strip() or BRM.get((r['酒蔵'],r['ブランド']),'')
+                individual=str(h.get('個別商品の歴史','')).strip()
+                histories.append(f'【ブランド史】{brand} 【商品史】{individual}')
+            elif key in PH:
+                brand=BRM.get((r['酒蔵'],r['ブランド']),'')
+                histories.append(f'【ブランド史】{brand} 【商品史】{PH[key]}')
             else:
-                base=BRM.get((r['酒蔵'],r['ブランド']),'')
-                histories.append(base+' 個別商品「'+str(r['商品名'])+'」の発売年・開発経緯は、確認できる公開情報では特定できない。')
+                raise RuntimeError(f'商品別歴史の調査行がありません: {key}')
         df['銘柄の歴史']=histories
         recs=[]
         for _,r in df.iterrows():

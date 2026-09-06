@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 import json, re
 import pandas as pd
 
@@ -122,7 +122,7 @@ def newrow(df, spec):
 def apply(products):
     for area, df in list(products.items()):
         df = df.copy().fillna("")
-        collab = df["商品名"].astype(str).str.contains("龍が如く|サンフレ|無相 SAKE MUSOU", regex=True, na=False)
+        collab = df["商品名"].astype(str).str.contains("龍が如く|サンフレ|無相 SAKE MUSOU|純米及川|^NAO$|純米酒[｢「]広大[｣」]|純米大吟醸[｢「]広大[｣」]", regex=True, na=False)
         df = df.loc[~collab].copy()
         df["使用米"] = df["使用米"].map(clean_rice)
         for (brewery, product), facts in OV.items():

@@ -316,6 +316,8 @@ def qa(products,bm,registry,main,summary):
       'product_duplicates_zero':int(allp.duplicated(['酒蔵','商品名']).sum())==0,
       'brewery_history_complete':int((allp['酒蔵の歴史'].str.strip()=='').sum())==0,
       'brand_history_complete':int((allp['銘柄の歴史'].str.strip()=='').sum())==0,
+      'product_history_fallback_zero':not allp['銘柄の歴史'].str.contains('確認できる公開情報では特定できない|発売年・開発経緯は',regex=True,na=False).any(),
+      'collaboration_products_zero':not allp['商品名'].str.contains('龍が如く|サンフレ|無相 SAKE MUSOU|純米及川|^NAO$|広大',regex=True,na=False).any(),
       'recommended_serving_complete':int((allp['おすすめの飲み方（文章）'].str.strip()=='').sum())==0,
       'sanyotsuru_honto':bool(((allp['酒蔵']=='山陽鶴酒造') & allp['商品名'].str.contains('ほんと',regex=False)).any()),
       'hakubotan_daiginjo_sizes':bool(((allp['酒蔵']=='白牡丹酒造') & (allp['商品名']=='大吟醸') & allp['容量'].str.contains('720ml',regex=False) & allp['容量'].str.contains('1,800ml',regex=False)).any()),
@@ -383,10 +385,12 @@ def update_readme(summary,products):
 - `research/current_sku/sku_master.csv`: 販売SKU。容量・価格・JAN・販売チャネル等
 - `research/web/index.csv`: 商品単位の調査・酒質情報
 - `research/current_sku/evidence/`: 現行SKU・ブランド確認の保存証拠
-- `research/history_serving_20260906/`: 酒蔵史・銘柄史・飲み方の追加調査、出典一覧、商品別推薦根拠
+- `research/history_serving_20260906/`: 酒蔵史・ブランド史・全商品の商品史・飲み方の追加調査、出典一覧、商品別推薦根拠
 - `sources/`: 外部オープンデータ等の原本
 
 販売状態は `販売中 / 休売 / 終売 / 不明` の4値です。容量・箱・容器だけが違う場合は上司向け商品表では統合し、生酒・にごり・熟成等で酒質が変わる場合は別商品として扱います。季節・数量・蔵元・流通・輸出限定の商品も2026-09-06時点で現行性を確認できれば収録します。ギフトセットや包装違いだけのSKU、コラボ商品は本表から除外し、監査情報で区別します。
+
+`銘柄の歴史` はブランド史と商品固有史を併記します。2026-09-06の再調査では調査対象204商品すべてを商品単位で確認し、発売・受賞・開発・製法変更・季節企画・商品固有設計等を `research/history_serving_20260906/product_history_full.csv` に記録しました。このうちコラボ・外部タイアップ4商品は監査表には残し、本表から除外しています。
 
 甘辛と短い `飲み方` は蔵元等の明示情報を優先し、根拠がない場合は `不明` / `要確認` を残します。一方、文章の `おすすめの飲み方` は全商品を必須入力とし、公式情報、信頼できる二次情報、既知の酒質情報からの推論の順で作成します。推論した行は文章中と `research/history_serving_20260906/product_serving_recommendations.csv` の根拠区分で識別できます。酒蔵・銘柄の歴史も同researchディレクトリに出典を保存します。日本酒度から甘辛を分類した場合は「目安」と明記します。
 
